@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e0203ad47bfd64fc8a10a67e92840aac
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player: {instanceID: 0}
+  - walkSprite: {fileID: 8995367577257597822, guid: 75da887ae3bda463885707beb954d64a, type: 3}
+  - eatSprite: {fileID: 273828102923322037, guid: e5286cda7acae4ed9a2c0a6cdc2e60f0, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 74a7c75f1c5c549c9b01d8a5f8b4d544
+guid: 75da887ae3bda463885707beb954d64a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5034252499844216912
-    second: bug2__0
+      213: 8995367577257597822
+    second: wichetty_goes_0
   - first:
-      213: 3564128553124525946
-    second: bug2__1
+      213: 2295621249792402129
+    second: wichetty_goes_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bug2__0
+      name: wichetty_goes_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 19
+        y: 39
         width: 32
-        height: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0b7c925260eb22ab0800000000000000
-      internalID: -5034252499844216912
+      spriteID: e7b518ae627f5dc70800000000000000
+      internalID: 8995367577257597822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bug2__1
+      name: wichetty_goes_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
+        y: 7
         width: 32
-        height: 18
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7770d61904567130800000000000000
-      internalID: 3564128553124525946
+      spriteID: 1d2e6bc2d5fabdf10800000000000000
+      internalID: 2295621249792402129
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bug2__0: -5034252499844216912
-      bug2__1: 3564128553124525946
+      wichetty_goes_0: 8995367577257597822
+      wichetty_goes_1: 2295621249792402129
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
