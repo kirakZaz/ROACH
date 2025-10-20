@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 843ca63958b054c298471a94c6101b21
+guid: 7a1884dc4029c4b0db2de0a72f7f7001
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5034252499844216912
-    second: bug2__0
-  - first:
-      213: 3564128553124525946
-    second: bug2__1
+      213: -6210378842267230894
+    second: ROACH_lilrat_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bug2__0
+      name: ROACH_lilrat_1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 19
+        y: 0
         width: 32
-        height: 17
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0b7c925260eb22ab0800000000000000
-      internalID: -5034252499844216912
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bug2__1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1
-        width: 32
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a7770d61904567130800000000000000
-      internalID: 3564128553124525946
+      spriteID: 25d5f02d85d40d9a0800000000000000
+      internalID: -6210378842267230894
       vertices: []
       indices: 
       edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bug2__0: -5034252499844216912
-      bug2__1: 3564128553124525946
+      ROACH_lilrat_1_0: -6210378842267230894
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

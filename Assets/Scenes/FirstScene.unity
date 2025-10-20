@@ -1359,9 +1359,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956645474}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.037, z: 0}
-  m_LocalScale: {x: 0.9411107, y: 0.9411107, z: 0.9411107}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0}
+  m_LocalScale: {x: 0.9411106, y: 0.8587635, z: 0.9411107}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1065854945}
@@ -1858,6 +1858,7 @@ Transform:
   m_Children:
   - {fileID: 1199802953}
   - {fileID: 956645475}
+  - {fileID: 1709028201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1065854946
@@ -1901,7 +1902,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.001, y: -0.009, z: 0}
-  m_LocalScale: {x: 0.22821544, y: 0.12213832, z: 0.39084265}
+  m_LocalScale: {x: 0.21207833, y: 0.11350192, z: 0.39084265}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1548803363}
@@ -2127,7 +2128,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.22
+  m_Radius: 0.8
 --- !u!50 &1377930479
 Rigidbody2D:
   serializedVersion: 5
@@ -2238,28 +2239,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1065854945}
-  edibleTag: Edible
-  moveSpeed: 2.28
-  jumpForce: 8.42
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 256
-  groundProbeWidth: 0.6
-  groundProbeHeight: 0.12
-  coyoteTime: 0.12
-  wallCheckDistance: 1.27
-  gapCheckDistance: 1.48
-  ledgeStepHeight: 0.9
-  jumpCooldown: 0.26
-  detectionRadius: 1.48
-  eatDistance: 0.6
-  eatDuration: 1.2
-  edibleMask:
-    serializedVersion: 2
-    m_Bits: 0
+  spriteRenderer: {fileID: 0}
   walkSprite: {fileID: 8995367577257597822, guid: 75da887ae3bda463885707beb954d64a, type: 3}
   eatSprite: {fileID: 273828102923322037, guid: e5286cda7acae4ed9a2c0a6cdc2e60f0, type: 3}
-  useAnimator: 0
+  followSpeed: 3.2
+  followDistance: 1.2
+  catchupDistance: 3
+  arriveStop: 0.15
+  detectRadius: 1.94
+  eatRangeFromEdges: 0.35
+  edibleTag: Edible
+  eatDuration: 0.99
+  flipSprite: 1
+  faceTargetWhenEating: 1
 --- !u!1 &1548803360
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,10 +2262,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1548803363}
   - component: {fileID: 1548803362}
-  - component: {fileID: 1548803361}
   - component: {fileID: 1548803364}
   - component: {fileID: 1548803366}
   - component: {fileID: 1548803365}
+  - component: {fileID: 1548803367}
+  - component: {fileID: 1548803368}
   m_Layer: 10
   m_Name: bug2_Enemy
   m_TagString: Enemy
@@ -2281,28 +2274,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &1548803361
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548803360}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ba414724777f4a41a02a1b2a5a43ec4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1548803362
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2326,7 +2297,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2367,8 +2338,8 @@ Transform:
   m_GameObject: {fileID: 1548803360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.29, y: -2.222, z: 0}
-  m_LocalScale: {x: 2.8437548, y: 2.8437548, z: 2.8437548}
+  m_LocalPosition: {x: -2.04, y: -2.12, z: 0}
+  m_LocalScale: {x: 4.076707, y: 4.076707, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1112623240}
@@ -2460,6 +2431,54 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1548803367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548803360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfaeaa47e2524d91abe942fe0bcc507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropBigRock: 1
+  bigRockScaleOn: 1
+  bigRockScale: 2.5
+  bigRockTag: Untagged
+  fallbackDropSprite: {fileID: 3452003437791708593, guid: 395eccb1430f7426ca577b09addaf879, type: 3}
+  dropSortingLayer: Default
+  dropOrderInLayer: 10
+  dropLocalScale: {x: 1, y: 1, z: 1}
+  armEdibleDelay: 0.15
+  stompsToKill: 2
+  deathDuration: 0.45
+  rockEdiblePrefab: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+  dropOffset: {x: 0, y: -0.05}
+  dropLift: 0.06
+--- !u!95 &1548803368
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548803360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a0d0d392766544b1bef38df6f18fa20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1558357179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,6 +2613,102 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1709028200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1709028201}
+  - component: {fileID: 1709028202}
+  - component: {fileID: 1709028203}
+  m_Layer: 9
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1709028201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709028200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.51, z: 0}
+  m_LocalScale: {x: 1.2207983, y: 0.31876397, z: 1.2057266}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1065854945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1709028202
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709028200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1709028203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709028200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db8a0f94d0b840c5876cba4652d64b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRb: {fileID: 1065854943}
+  playerHurtCollider: {fileID: 1065854942}
+  minDownSpeed: -1
+  bounceVelocity: 9
+  postStompInvuln: 0.25
 --- !u!1 &1795884064
 GameObject:
   m_ObjectHideFlags: 0
@@ -2850,6 +2965,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Edible
       objectReference: {fileID: 0}
+    - target: {fileID: 5573418379050213030, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+      propertyPath: m_Radius
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 6435144794077784081, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.0525224
@@ -2864,11 +2983,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6435144794077784081, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.88
+      value: 4.49
       objectReference: {fileID: 0}
     - target: {fileID: 6435144794077784081, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.27
+      value: -3.45
       objectReference: {fileID: 0}
     - target: {fileID: 6435144794077784081, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_LocalPosition.z
