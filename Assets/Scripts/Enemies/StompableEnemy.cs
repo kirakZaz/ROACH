@@ -5,22 +5,44 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class StompableEnemy : MonoBehaviour, IStompable
 {
-    [Header("Big Drop (not edible)")]
+    [Header("Health")]
+    [SerializeField, Min(1)]
+    private int stompsToKill = 2; // ← edit in Inspector
+
+    [
+        SerializeField,
+        Tooltip(
+            "Ignore additional stomps for this time after a valid stomp to avoid multi-counts from the same contact."
+        )
+    ]
+    private float stompCooldown = 0.15f; // avoids duplicate counts while still on top
+
+    [Header("Partial Hit Feedback")]
     [SerializeField]
-    private bool dropBigRock = false; // turn ON to drop a big rock
+    private bool flashOnHit = true;
 
     [SerializeField]
-    private bool bigRockScaleOn = true; // turn ON to drop a big rock
+    private Color hitFlashColor = new Color(1f, 0.6f, 0.6f, 1f);
 
     [SerializeField]
-    private float bigRockScale = 2.5f; // 2.0–3.0 works well
+    private float hitFlashTime = 0.08f;
+
+    [Header("Death")]
+    [SerializeField]
+    private float deathDuration = 0.45f;
+
+    [Header("Drop On Death")]
+    [SerializeField]
+    private GameObject rockEdiblePrefab;
 
     [SerializeField]
-    private string bigRockTag = "Untagged"; // or create a "Resource" tag
+    private bool bigRockScaleOn = true;
 
-    [Header("Drop Visual/Debug")]
+    [SerializeField, Range(0.5f, 4f)]
+    private float bigRockScale = 2.5f;
+
     [SerializeField]
-    private Sprite fallbackDropSprite;
+    private Vector3 dropLocalScale = Vector3.one;
 
     [SerializeField]
     private string dropSortingLayer = "Default";
@@ -29,33 +51,19 @@ public class StompableEnemy : MonoBehaviour, IStompable
     private int dropOrderInLayer = 10;
 
     [SerializeField]
-    private Vector3 dropLocalScale = Vector3.one;
-
-    [SerializeField]
-    private float armEdibleDelay = 0.15f;
-
-    private Vector3 lastDropPos;
-
-    [Header("Health")]
-    [SerializeField]
-    private int stompsToKill = 2;
-
-    [Header("Death")]
-    [SerializeField]
-    private float deathDuration = 0.45f;
-
-    [SerializeField]
-    private GameObject rockEdiblePrefab;
-
-    [SerializeField]
     private Vector2 dropOffset = new Vector2(0f, -0.05f);
 
-    [Tooltip("Small upward nudge to avoid spawning inside ground")]
-    [SerializeField]
+    [SerializeField, Tooltip("Small upward nudge to avoid spawning inside ground")]
     private float dropLift = 0.06f;
 
+    [SerializeField]
+    private Sprite fallbackDropSprite;
+
+    // ---- internals ----
     private int stompCount = 0;
     private bool isDying = false;
+    private float lastStompTime = -999f;
+
     private SpriteRenderer spriteRenderer;
     private Collider2D enemyCollider;
     private Rigidbody2D enemyRb;
@@ -68,20 +76,22 @@ public class StompableEnemy : MonoBehaviour, IStompable
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (!spriteRenderer)
             spriteRenderer = GetComponent<SpriteRenderer>();
+
         enemyCollider = GetComponent<Collider2D>();
         enemyRb = GetComponent<Rigidbody2D>();
 
         if (spriteRenderer)
             initialColor = spriteRenderer.color;
         initialScale = transform.localScale;
-
-        // Safety: if animator cleared the sprite somehow, try to restore from Resources (optional)
-        if (spriteRenderer && spriteRenderer.sprite == null)
-            spriteRenderer.sprite = Resources.Load<Sprite>("bug2 (1)_0");
     }
 
     private void OnEnable()
     {
+        // reset state
+        isDying = false;
+        stompCount = 0;
+        lastStompTime = -999f;
+
         if (spriteRenderer)
         {
             var c = initialColor;
@@ -91,29 +101,46 @@ public class StompableEnemy : MonoBehaviour, IStompable
         }
         transform.localScale = initialScale;
 
-        isDying = false;
-        stompCount = 0;
-
         if (enemyCollider)
             enemyCollider.enabled = true;
         if (enemyRb)
             enemyRb.simulated = true;
     }
 
+    // ===== IStompable =====
     public void TakeStomp(GameObject stomper)
     {
         if (isDying)
             return;
 
+        // cooldown to prevent multiple counts from one continuous contact
+        if (Time.time - lastStompTime < stompCooldown)
+            return;
+        lastStompTime = Time.time;
+
         stompCount++;
+
+        // debug (optional)
+        // Debug.Log($"[{name}] stomp {stompCount}/{stompsToKill}");
+
         if (stompCount >= stompsToKill)
         {
             StartCoroutine(DeathSequence());
         }
         else
         {
-            // optional partial-hit feedback (sound/flash)
+            if (flashOnHit && spriteRenderer)
+                StartCoroutine(FlashHit());
         }
+    }
+
+    private IEnumerator FlashHit()
+    {
+        Color before = spriteRenderer.color;
+        spriteRenderer.color = hitFlashColor;
+        yield return new WaitForSeconds(hitFlashTime);
+        if (spriteRenderer)
+            spriteRenderer.color = before;
     }
 
     private IEnumerator DeathSequence()
@@ -146,48 +173,33 @@ public class StompableEnemy : MonoBehaviour, IStompable
             yield return null;
         }
 
-        if (rockEdiblePrefab)
-        {
-            float direction = transform.localScale.x > 0 ? -1f : 1f;
-
-            Vector3 spawnPos =
-                transform.position + new Vector3(direction * 0.35f, 0.35f + dropLift, 0f);
-
-            GameObject drop = Instantiate(rockEdiblePrefab, spawnPos, Quaternion.identity);
-
-            // always edible; scale 1f или bigRockScale — как захочешь
-            float scale = bigRockScaleOn ? bigRockScale : 1f;
-            PrepareDropAlwaysEdible(drop, direction, scale);
-
-            Debug.Log($"[StompableEnemy] Dropped edible rock (scale {scale}) at {spawnPos}");
-        }
-        else
-        {
-            Debug.LogWarning("[StompableEnemy] rockEdiblePrefab is not assigned. Nothing to drop.");
-        }
-
+        SpawnDropIfAny();
         Destroy(gameObject);
     }
 
-    private void PrepareDropAlwaysEdible(GameObject drop, float direction, float scale)
+    private void SpawnDropIfAny()
     {
-        if (!drop)
+        if (!rockEdiblePrefab)
             return;
 
-        // Tag: always edible
+        float direction = transform.localScale.x >= 0 ? -1f : 1f;
+        Vector3 spawnPos =
+            transform.position + new Vector3(direction * 0.35f, 0.35f + dropLift, 0f);
+
+        GameObject drop = Instantiate(rockEdiblePrefab, spawnPos, Quaternion.identity);
+
+        // Always edible/tagged
         try
         {
             drop.tag = "Edible";
         }
-        catch
-        { /* ensure the tag exists in Tags & Layers */
-        }
+        catch { }
 
-        // SpriteRenderer
+        // Sprite
         var sr = drop.GetComponentInChildren<SpriteRenderer>();
         if (!sr)
             sr = drop.AddComponent<SpriteRenderer>();
-        if (sr && sr.sprite == null && fallbackDropSprite != null)
+        if (sr && sr.sprite == null && fallbackDropSprite)
             sr.sprite = fallbackDropSprite;
         if (sr)
         {
@@ -198,19 +210,14 @@ public class StompableEnemy : MonoBehaviour, IStompable
             sr.color = c;
         }
 
-        // Scale (2D colliders scale with transform)
-        drop.transform.localScale = dropLocalScale * scale;
+        // Scale/collider/rigidbody
+        drop.transform.localScale = dropLocalScale * (bigRockScaleOn ? bigRockScale : 1f);
 
-        // Collider (non-trigger so it lands)
         var col = drop.GetComponent<Collider2D>();
         if (!col)
             col = drop.AddComponent<CircleCollider2D>();
-        if (col is BoxCollider2D b)
-            b.isTrigger = false;
-        if (col is CircleCollider2D cc)
-            cc.isTrigger = false;
+        col.isTrigger = false;
 
-        // Rigidbody (so it falls), then small toss
         var rb = drop.GetComponent<Rigidbody2D>();
         if (!rb)
             rb = drop.AddComponent<Rigidbody2D>();
@@ -219,82 +226,14 @@ public class StompableEnemy : MonoBehaviour, IStompable
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.linearVelocity = new Vector2(direction * 1.8f, 2.5f);
 
-        // Land and freeze when touching Ground (чтобы не скатывался)
         if (!drop.GetComponent<FreezeOnGround>())
             drop.AddComponent<FreezeOnGround>();
     }
 
-    private IEnumerator ArmEdibleAfterDelay(GameObject drop)
-    {
-        // temporarily untagged
-        string originalTag = "Edible";
-        try
-        {
-            drop.tag = "Untagged";
-        }
-        catch { }
-
-        yield return new WaitForSeconds(armEdibleDelay);
-
-        // now become edible
-        try
-        {
-            drop.tag = originalTag;
-        }
-        catch
-        {
-            Debug.LogWarning("[StompableEnemy] Tag 'Edible' missing. Create it in Tags & Layers.");
-        }
-    }
-
     private void OnDrawGizmosSelected()
     {
+        // (optional visual) show small dot where drop spawns
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(lastDropPos, 0.1f);
-    }
-
-    private void EnsureEdibleSetup(GameObject drop)
-    {
-        if (!drop)
-            return;
-
-        // Ensure tag
-        if (drop.tag != "Edible")
-        {
-            try
-            {
-                drop.tag = "Edible";
-            }
-            catch
-            {
-                Debug.LogWarning(
-                    "[StompableEnemy] Tag 'Edible' is missing in project. Add it or set on prefab."
-                );
-            }
-        }
-
-        // Ensure a visible sprite (optional, in case prefab has no sprite)
-        var sr = drop.GetComponentInChildren<SpriteRenderer>();
-        if (!sr)
-            sr = drop.AddComponent<SpriteRenderer>(); // fallback invisible until you assign sprite on prefab
-
-        // Ensure collider so it sits on ground and Witchetty can measure edge distance
-        var col = drop.GetComponent<Collider2D>();
-        if (!col)
-        {
-            col = drop.AddComponent<BoxCollider2D>();
-            (col as BoxCollider2D).isTrigger = false;
-            Debug.Log("[StompableEnemy] Added BoxCollider2D to drop.");
-        }
-
-        // Ensure Rigidbody2D so it falls naturally (optional but nice)
-        var rb = drop.GetComponent<Rigidbody2D>();
-        if (!rb)
-        {
-            rb = drop.AddComponent<Rigidbody2D>();
-            rb.gravityScale = 2f;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            Debug.Log("[StompableEnemy] Added Rigidbody2D to drop.");
-        }
+        Gizmos.DrawWireSphere(transform.position + (Vector3)dropOffset, 0.08f);
     }
 }
