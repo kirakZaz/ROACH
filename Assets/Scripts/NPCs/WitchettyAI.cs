@@ -7,40 +7,78 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class WhitchettyAI : MonoBehaviour
 {
-    public enum State { Follow, MoveToFood, Eating }
+    public enum State
+    {
+        Follow,
+        MoveToFood,
+        Eating,
+    }
 
     [Header("References")]
-    [SerializeField] private Transform player;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite walkSprite;
-    [SerializeField] private Sprite eatSprite;
+    [SerializeField]
+    private Transform player;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private Sprite walkSprite;
+
+    [SerializeField]
+    private Sprite eatSprite;
 
     [Header("Follow")]
-    [SerializeField] private float followSpeed = 3.2f;
-    [SerializeField] private float followDistance = 1.2f;
-    [SerializeField] private float catchupDistance = 3.0f;
-    [SerializeField] private float arriveStop = 0.15f;
+    [SerializeField]
+    private float followSpeed = 3.2f;
+
+    [SerializeField]
+    private float followDistance = 1.2f;
+
+    [SerializeField]
+    private float catchupDistance = 3.0f;
+
+    [SerializeField]
+    private float arriveStop = 0.15f;
 
     [Header("Food Seeking")]
     [Tooltip("Max radius to search for food by tag")]
-    [SerializeField] private float detectRadius = 3.5f;
+    [SerializeField]
+    private float detectRadius = 3.5f;
+
     [Tooltip("Start eating when distance between colliders is below this value")]
-    [SerializeField] private float eatRangeFromEdges = 0.35f;
-    [SerializeField] private string edibleTag = "Edible";
+    [SerializeField]
+    private float eatRangeFromEdges = 0.35f;
+
+    [SerializeField]
+    private string edibleTag = "Edible";
+
     [Tooltip("Used only if food has no Edible component")]
-    [SerializeField] private float eatDuration = 1.0f;
+    [SerializeField]
+    private float eatDuration = 1.0f;
 
     [Header("Visuals")]
-    [SerializeField] private bool flipSprite = true;
-    [SerializeField] private bool faceTargetWhenEating = true;
+    [SerializeField]
+    private bool flipSprite = true;
+
+    [SerializeField]
+    private bool faceTargetWhenEating = true;
 
     // ---------- AUDIO ----------
     [Header("Audio (Eating)")]
-    [SerializeField] private AudioClip eatClip;             
-    [SerializeField, Range(0f, 1f)] private float eatVolume = 0.3f;
-    [SerializeField] private bool playAsLoop = true;           
-    [SerializeField] private float biteInterval = 0.35f;  
-    [SerializeField] private Vector2 bitePitchRange = new Vector2(0.95f, 1.05f);
+    [SerializeField]
+    private AudioClip eatClip;
+
+    [SerializeField, Range(0f, 1f)]
+    private float eatVolume = 0.3f;
+
+    [SerializeField]
+    private bool playAsLoop = true;
+
+    [SerializeField]
+    private float biteInterval = 0.35f;
+
+    [SerializeField]
+    private Vector2 bitePitchRange = new Vector2(0.95f, 1.05f);
 
     private Rigidbody2D rb;
     private Collider2D selfCol;
@@ -51,7 +89,7 @@ public class WhitchettyAI : MonoBehaviour
 
     // audio
     private AudioSource audioSrc;
-    private Coroutine biteLoopCo;  
+    private Coroutine biteLoopCo;
 
     private void Awake()
     {
@@ -59,16 +97,18 @@ public class WhitchettyAI : MonoBehaviour
         selfCol = GetComponent<Collider2D>();
         audioSrc = GetComponent<AudioSource>();
 
-        if (!spriteRenderer) spriteRenderer = GetComponent<SpriteRenderer>();
+        if (!spriteRenderer)
+            spriteRenderer = GetComponent<SpriteRenderer>();
         if (!player)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
-            if (p) player = p.transform;
+            if (p)
+                player = p.transform;
         }
 
         audioSrc.playOnAwake = false;
         audioSrc.spatialBlend = 0f;
-        audioSrc.loop = false;      
+        audioSrc.loop = false;
         audioSrc.volume = 1f;
 
         SetWalkVisual();
@@ -81,30 +121,41 @@ public class WhitchettyAI : MonoBehaviour
 
     private void Update()
     {
-        if (!player) return;
+        if (!player)
+            return;
 
         if (!isEating)
         {
-            if (!currentFood) currentFood = FindNearestFood();
+            if (!currentFood)
+                currentFood = FindNearestFood();
             state = currentFood ? State.MoveToFood : State.Follow;
         }
 
         if (flipSprite && spriteRenderer && rb != null)
         {
-            if (rb.linearVelocity.x > 0.02f) spriteRenderer.flipX = false;
-            else if (rb.linearVelocity.x < -0.02f) spriteRenderer.flipX = true;
+            if (rb.linearVelocity.x > 0.02f)
+                spriteRenderer.flipX = false;
+            else if (rb.linearVelocity.x < -0.02f)
+                spriteRenderer.flipX = true;
         }
     }
 
     private void FixedUpdate()
     {
-        if (!player) return;
+        if (!player)
+            return;
 
         switch (state)
         {
-            case State.Follow:    FollowPlayer(); break;
-            case State.MoveToFood: MoveToFood();  break;
-            case State.Eating:    rb.linearVelocity = Vector2.zero; break;
+            case State.Follow:
+                FollowPlayer();
+                break;
+            case State.MoveToFood:
+                MoveToFood();
+                break;
+            case State.Eating:
+                rb.linearVelocity = Vector2.zero;
+                break;
         }
     }
 
@@ -117,14 +168,16 @@ public class WhitchettyAI : MonoBehaviour
         {
             float speed = dist > catchupDistance ? followSpeed * 1.6f : followSpeed;
             rb.linearVelocity = to.normalized * speed;
-            if (dist < arriveStop) rb.linearVelocity = Vector2.zero;
+            if (dist < arriveStop)
+                rb.linearVelocity = Vector2.zero;
         }
         else
         {
             rb.linearVelocity = Vector2.zero;
         }
 
-        if (!isEating) SetWalkVisual();
+        if (!isEating)
+            SetWalkVisual();
     }
 
     private void MoveToFood()
@@ -175,17 +228,15 @@ public class WhitchettyAI : MonoBehaviour
             spriteRenderer.flipX = (currentFood.position.x < transform.position.x);
 
         SetEatVisual();
-        StartEatSound(); 
+        StartEatSound();
 
         var edible = currentFood.GetComponent<Edible>();
         if (edible != null)
         {
-           
             yield return StartCoroutine(edible.ConsumeAndDestroy());
         }
         else
         {
-        
             float t = 0f;
             Vector3 start = currentFood.localScale;
             while (t < eatDuration && currentFood)
@@ -195,10 +246,11 @@ public class WhitchettyAI : MonoBehaviour
                 currentFood.localScale = Vector3.Lerp(start, Vector3.zero, k);
                 yield return null;
             }
-            if (currentFood) Destroy(currentFood.gameObject);
+            if (currentFood)
+                Destroy(currentFood.gameObject);
         }
 
-        StopEatSound(); 
+        StopEatSound();
 
         currentFood = null;
         isEating = false;
@@ -227,12 +279,14 @@ public class WhitchettyAI : MonoBehaviour
 
     private void SetWalkVisual()
     {
-        if (spriteRenderer && walkSprite) spriteRenderer.sprite = walkSprite;
+        if (spriteRenderer && walkSprite)
+            spriteRenderer.sprite = walkSprite;
     }
 
     private void SetEatVisual()
     {
-        if (spriteRenderer && eatSprite) spriteRenderer.sprite = eatSprite;
+        if (spriteRenderer && eatSprite)
+            spriteRenderer.sprite = eatSprite;
     }
 
     private void OnDrawGizmosSelected()
@@ -244,7 +298,8 @@ public class WhitchettyAI : MonoBehaviour
     // ---------- AUDIO HELPERS ----------
     private void StartEatSound()
     {
-        if (!eatClip || !audioSrc) return;
+        if (!eatClip || !audioSrc)
+            return;
 
         if (playAsLoop)
         {
@@ -252,29 +307,33 @@ public class WhitchettyAI : MonoBehaviour
             audioSrc.clip = eatClip;
             audioSrc.loop = true;
             audioSrc.volume = eatVolume;
-            audioSrc.pitch = 1f; 
+            audioSrc.pitch = 1f;
             audioSrc.Play();
         }
         else
         {
-            if (biteLoopCo != null) StopCoroutine(biteLoopCo);
+            if (biteLoopCo != null)
+                StopCoroutine(biteLoopCo);
             biteLoopCo = StartCoroutine(BiteLoop());
         }
     }
 
     private void StopEatSound()
     {
-        if (!audioSrc) return;
+        if (!audioSrc)
+            return;
 
         if (playAsLoop)
         {
-            if (audioSrc.isPlaying && audioSrc.clip == eatClip) audioSrc.Stop();
+            if (audioSrc.isPlaying && audioSrc.clip == eatClip)
+                audioSrc.Stop();
             audioSrc.clip = null;
             audioSrc.loop = false;
         }
         else
         {
-            if (biteLoopCo != null) StopCoroutine(biteLoopCo);
+            if (biteLoopCo != null)
+                StopCoroutine(biteLoopCo);
             biteLoopCo = null;
         }
     }

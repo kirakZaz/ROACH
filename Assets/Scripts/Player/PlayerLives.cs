@@ -4,7 +4,8 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)] // initialize before UI
 public class PlayerLives : MonoBehaviour
 {
-    [SerializeField] private int maxLives = 3;
+    [SerializeField]
+    private int maxLives = 3;
     public int CurrentLives { get; private set; }
 
     public event Action<int> OnLivesChanged;
@@ -18,7 +19,8 @@ public class PlayerLives : MonoBehaviour
 
     public void LoseLife(int amount = 1)
     {
-        if (CurrentLives <= 0) return;
+        if (CurrentLives <= 0)
+            return;
 
         CurrentLives = Mathf.Max(0, CurrentLives - amount);
         OnLivesChanged?.Invoke(CurrentLives);

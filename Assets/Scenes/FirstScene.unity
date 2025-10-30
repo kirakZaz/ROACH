@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 10704566}
   - component: {fileID: 10704565}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (2)
+  m_Name: PlatformWithTube_27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 63010445}
   - component: {fileID: 63010446}
   m_Layer: 0
-  m_Name: Decor1 (10)
+  m_Name: Decor_rock_big_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,20 +412,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfaeaa47e2524d91abe942fe0bcc507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropBigRock: 1
-  bigRockScaleOn: 1
-  bigRockScale: 2.5
-  bigRockTag: Untagged
-  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
-  dropSortingLayer: Default
-  dropOrderInLayer: 10
-  dropLocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  armEdibleDelay: 0.15
-  stompsToKill: 2
+  stompsToKill: 3
+  stompCooldown: 0.15
+  flashOnHit: 1
+  hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
+  hitFlashTime: 0.08
   deathDuration: 0.45
   rockEdiblePrefab: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+  bigRockScaleOn: 1
+  bigRockScale: 2.5
+  dropLocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  dropSortingLayer: Default
+  dropOrderInLayer: 10
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
+  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
 --- !u!61 &72499111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -578,7 +579,7 @@ GameObject:
   - component: {fileID: 94142922}
   - component: {fileID: 94142923}
   m_Layer: 0
-  m_Name: Decor1 (16)
+  m_Name: Decor1_wall4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,7 +789,7 @@ GameObject:
   - component: {fileID: 177010382}
   - component: {fileID: 177010381}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (17)
+  m_Name: PlatformWithTube_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -803,7 +804,7 @@ Transform:
   m_GameObject: {fileID: 177010379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.04, y: 6.9, z: 0}
+  m_LocalPosition: {x: 7.81, y: 6.9, z: 0}
   m_LocalScale: {x: 3.5291443, y: 13.757642, z: 8.595795}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -997,7 +998,7 @@ GameObject:
   - component: {fileID: 217960664}
   - component: {fileID: 217960663}
   m_Layer: 8
-  m_Name: PlatformWithTube1
+  m_Name: PlatformWithTube_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1012,8 +1013,8 @@ Transform:
   m_GameObject: {fileID: 217960661}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.59, y: -3.57, z: 0}
-  m_LocalScale: {x: 15.63891, y: 16.143393, z: 13.452826}
+  m_LocalPosition: {x: 1.33, y: -3.57, z: 0}
+  m_LocalScale: {x: 13.293074, y: 16.143393, z: 13.452826}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 955785737}
@@ -1131,7 +1132,7 @@ GameObject:
   - component: {fileID: 258798315}
   - component: {fileID: 258798316}
   m_Layer: 8
-  m_Name: Tube_1
+  m_Name: PlatformWithTube_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1146,7 +1147,7 @@ Transform:
   m_GameObject: {fileID: 258798313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.04, y: -6.801429, z: 0}
+  m_LocalPosition: {x: -3.11, y: -6.801429, z: 0}
   m_LocalScale: {x: 7.9411325, y: 11.45606, z: 5.2073}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1265,7 +1266,7 @@ GameObject:
   - component: {fileID: 269834535}
   - component: {fileID: 269834534}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (25)
+  m_Name: Barrel_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1399,7 +1400,7 @@ GameObject:
   - component: {fileID: 288238887}
   - component: {fileID: 288238886}
   m_Layer: 8
-  m_Name: PlatformWithTube1 (1)
+  m_Name: PlatformWithTube_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1533,7 +1534,7 @@ GameObject:
   - component: {fileID: 301656410}
   - component: {fileID: 301656409}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (13)
+  m_Name: PlatformWithTube_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1666,7 +1667,7 @@ GameObject:
   - component: {fileID: 308826146}
   - component: {fileID: 308826147}
   m_Layer: 0
-  m_Name: Decor1 (9)
+  m_Name: Decor_rock_big_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1754,7 +1755,7 @@ GameObject:
   - component: {fileID: 396239510}
   - component: {fileID: 396239509}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (1)
+  m_Name: PlatformWithTube_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1888,7 +1889,7 @@ GameObject:
   - component: {fileID: 411307565}
   - component: {fileID: 411307564}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (3)
+  m_Name: PlatformWithTube_22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1903,7 +1904,7 @@ Transform:
   m_GameObject: {fileID: 411307562}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.586, y: 19.059998, z: 0}
+  m_LocalPosition: {x: 7.57, y: 18.93, z: 0}
   m_LocalScale: {x: 5.5275774, y: 9.428861, z: 3.6545966}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2022,7 +2023,7 @@ GameObject:
   - component: {fileID: 451960615}
   - component: {fileID: 451960614}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (24)
+  m_Name: PlatformWithTube_29
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2355,20 +2356,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfaeaa47e2524d91abe942fe0bcc507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropBigRock: 1
-  bigRockScaleOn: 1
-  bigRockScale: 2.5
-  bigRockTag: Untagged
-  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
-  dropSortingLayer: Default
-  dropOrderInLayer: 10
-  dropLocalScale: {x: 1, y: 1, z: 1}
-  armEdibleDelay: 0.15
   stompsToKill: 2
+  stompCooldown: 0.15
+  flashOnHit: 1
+  hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
+  hitFlashTime: 0.08
   deathDuration: 0.45
   rockEdiblePrefab: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+  bigRockScaleOn: 1
+  bigRockScale: 2.5
+  dropLocalScale: {x: 1, y: 1, z: 1}
+  dropSortingLayer: Default
+  dropOrderInLayer: 10
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
+  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
 --- !u!61 &566604534
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2630,7 +2632,7 @@ GameObject:
   - component: {fileID: 605998876}
   - component: {fileID: 605998877}
   m_Layer: 0
-  m_Name: Decor1
+  m_Name: Decor_bush_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2645,7 +2647,7 @@ Transform:
   m_GameObject: {fileID: 605998875}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.09, y: 2.37, z: 0}
+  m_LocalPosition: {x: 5.0621004, y: 2.3131266, z: 0}
   m_LocalScale: {x: 5.1101, y: 5.1101, z: 5.1101}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2802,7 +2804,7 @@ GameObject:
   - component: {fileID: 620680586}
   - component: {fileID: 620680585}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (23)
+  m_Name: PlatformWithTube_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2935,7 +2937,7 @@ GameObject:
   - component: {fileID: 626934172}
   - component: {fileID: 626934173}
   m_Layer: 0
-  m_Name: Decor1 (7)
+  m_Name: Decor1_wall1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2950,7 +2952,7 @@ Transform:
   m_GameObject: {fileID: 626934171}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9899993, y: -2.68, z: 0}
+  m_LocalPosition: {x: 7.5889373, y: -2.68, z: 0}
   m_LocalScale: {x: 11.880813, y: 12.1698475, z: 12.1698475}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3098,7 +3100,7 @@ GameObject:
   - component: {fileID: 757951788}
   - component: {fileID: 757951787}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (12)
+  m_Name: PlatformWithTube_19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3232,7 +3234,7 @@ GameObject:
   - component: {fileID: 870997120}
   - component: {fileID: 870997119}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (16)
+  m_Name: PlatformWithTube_26
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3247,7 +3249,7 @@ Transform:
   m_GameObject: {fileID: 870997117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77, y: 14.942858, z: 0}
+  m_LocalPosition: {x: 0.8, y: 14.942858, z: 0}
   m_LocalScale: {x: 6.092792, y: 12.407786, z: 10.476219}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3444,7 +3446,7 @@ GameObject:
   - component: {fileID: 912350136}
   - component: {fileID: 912350137}
   m_Layer: 0
-  m_Name: Decor1 (5)
+  m_Name: Decor_rock_small_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3459,7 +3461,7 @@ Transform:
   m_GameObject: {fileID: 912350135}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: -0.16, z: 0}
+  m_LocalPosition: {x: -0.75, y: -0.95, z: 0}
   m_LocalScale: {x: 3.6647592, y: 3.6647592, z: 3.6647592}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3532,7 +3534,7 @@ GameObject:
   - component: {fileID: 916650786}
   - component: {fileID: 916650785}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (10)
+  m_Name: PlatformWithTube_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3666,7 +3668,7 @@ GameObject:
   - component: {fileID: 947846761}
   - component: {fileID: 947846760}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (22)
+  m_Name: Barrel_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3850,7 +3852,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0.98039216}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3875,36 +3877,36 @@ Transform:
   m_Children:
   - {fileID: 258798314}
   - {fileID: 217960662}
-  - {fileID: 288238885}
-  - {fileID: 2000815078}
-  - {fileID: 1842271778}
-  - {fileID: 1434675174}
-  - {fileID: 396239508}
-  - {fileID: 10704564}
-  - {fileID: 411307563}
-  - {fileID: 962555934}
-  - {fileID: 2136809211}
-  - {fileID: 1557699838}
-  - {fileID: 947846759}
-  - {fileID: 269834533}
   - {fileID: 916650784}
-  - {fileID: 757951786}
-  - {fileID: 1579132708}
-  - {fileID: 1020975448}
+  - {fileID: 620680584}
+  - {fileID: 1434675174}
   - {fileID: 2049713941}
-  - {fileID: 1828964426}
+  - {fileID: 1020975448}
+  - {fileID: 288238885}
+  - {fileID: 1626324071}
   - {fileID: 1880245922}
   - {fileID: 1458076280}
   - {fileID: 301656408}
-  - {fileID: 2091737768}
-  - {fileID: 1626324071}
-  - {fileID: 870997118}
+  - {fileID: 1842271778}
+  - {fileID: 396239508}
+  - {fileID: 962555934}
   - {fileID: 177010380}
-  - {fileID: 1488489681}
-  - {fileID: 1934889031}
-  - {fileID: 451960613}
+  - {fileID: 2000815078}
+  - {fileID: 1579132708}
+  - {fileID: 757951786}
+  - {fileID: 2136809211}
+  - {fileID: 1828964426}
+  - {fileID: 411307563}
+  - {fileID: 2091737768}
   - {fileID: 1723591828}
-  - {fileID: 620680584}
+  - {fileID: 1488489681}
+  - {fileID: 870997118}
+  - {fileID: 1934889031}
+  - {fileID: 10704564}
+  - {fileID: 451960613}
+  - {fileID: 1557699838}
+  - {fileID: 947846759}
+  - {fileID: 269834533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &956645474
@@ -4016,7 +4018,7 @@ GameObject:
   - component: {fileID: 962555936}
   - component: {fileID: 962555935}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (4)
+  m_Name: PlatformWithTube_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4149,7 +4151,7 @@ GameObject:
   - component: {fileID: 982272530}
   - component: {fileID: 982272531}
   m_Layer: 0
-  m_Name: Decor1 (17)
+  m_Name: Decor1_wall4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4164,7 +4166,7 @@ Transform:
   m_GameObject: {fileID: 982272529}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7121275, w: 0.7020502}
-  m_LocalPosition: {x: 4.34, y: 2.68, z: 0}
+  m_LocalPosition: {x: 4.3121004, y: 2.6231267, z: 0}
   m_LocalScale: {x: 11.309143, y: 11.58427, z: 11.58427}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4287,7 +4289,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aa811f548e39248239fe97b828346bb4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.77254903}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4324,7 +4326,7 @@ GameObject:
   - component: {fileID: 1020975450}
   - component: {fileID: 1020975449}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (5)
+  m_Name: PlatformWithTube_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4457,7 +4459,7 @@ GameObject:
   - component: {fileID: 1042038498}
   - component: {fileID: 1042038499}
   m_Layer: 0
-  m_Name: Decor1 (4)
+  m_Name: Decor_rock_small_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4701,8 +4703,8 @@ Transform:
   m_GameObject: {fileID: 1065854939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.068, y: -5.37, z: 0}
-  m_LocalScale: {x: 1.3116404, y: 2.2027016, z: 2.2027016}
+  m_LocalPosition: {x: -13.065, y: -5.37, z: 0}
+  m_LocalScale: {x: 1.8035055, y: 2.2027016, z: 2.2027016}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1199802953}
@@ -4858,13 +4860,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   jumpForce: 12
+  jumpKey: 119
   fallGravityMultiplier: 1.8
   lowJumpMultiplier: 2
-  groundCheck: {fileID: 0}
-  groundRadius: 0.16
+  groundCheck: {fileID: 1199802953}
+  groundRadius: 0.22
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   wallCheckLeft: {fileID: 0}
   wallCheckRight: {fileID: 0}
   wallCheckSize: {x: 0.12, y: 0.9}
@@ -4880,13 +4883,15 @@ MonoBehaviour:
   crouchHeightMultiplier: 0.6
   flipSpriteOnMove: 1
   fallThreshold: -10
-  sfxJump: {fileID: 8300000, guid: 7fd76a7cd954c43cab51d647d3eee2c3, type: 3}
-  sfxLand: {fileID: 8300000, guid: f6dd8f345dc1d4f0a89d809fe7b1922b, type: 3}
-  sfxFootstep: {fileID: 8300000, guid: 1dcd74f9391bb402a97ac0dea2c59316, type: 3}
-  sfxWallClimbLoop: {fileID: 8300000, guid: a1b616d60d7844bc5b69d2e732899378, type: 3}
-  sfxCrouch: {fileID: 8300000, guid: 9446a4d0da47a4215915b8ef11172078, type: 3}
-  sfxFail: {fileID: 8300000, guid: 09858dd6d3f284d4c9b8df9785562f47, type: 3}
-  footstepInterval: 0.35
+  sfxBackground: {fileID: 8300000, guid: 09858dd6d3f284d4c9b8df9785562f47, type: 3}
+  backgroundVolume: 0.2
+  persistBackgroundAcrossScenes: 1
+  sfxAttack: {fileID: 8300000, guid: 840793148331a4f6881e29e94b6b9b67, type: 3}
+  stompBounceForce: 6
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requireDownwardVelocity: 1
 --- !u!1 &1112623239
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,7 +5071,7 @@ GameObject:
   - component: {fileID: 1164806511}
   - component: {fileID: 1164806512}
   m_Layer: 0
-  m_Name: Decor1 (8)
+  m_Name: Decor_rock_small_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5081,7 +5086,7 @@ Transform:
   m_GameObject: {fileID: 1164806510}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.68, y: -3.23, z: 0}
+  m_LocalPosition: {x: 4.278938, y: -3.23, z: 0}
   m_LocalScale: {x: 3.6647592, y: 3.6647592, z: 3.6647592}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5184,7 +5189,7 @@ GameObject:
   - component: {fileID: 1202342409}
   - component: {fileID: 1202342410}
   m_Layer: 0
-  m_Name: Decor1 (2)
+  m_Name: Decor_bush_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5273,6 +5278,7 @@ GameObject:
   - component: {fileID: 1377930479}
   - component: {fileID: 1377930478}
   - component: {fileID: 1377930482}
+  - component: {fileID: 1377930483}
   m_Layer: 13
   m_Name: Witchetty
   m_TagString: Untagged
@@ -5439,6 +5445,108 @@ MonoBehaviour:
   eatDuration: 0.99
   flipSprite: 1
   faceTargetWhenEating: 1
+  eatClip: {fileID: 8300000, guid: 34c011dda4fed4ad6a308d5fee91b237, type: 3}
+  eatVolume: 0.3
+  playAsLoop: 0
+  biteInterval: 0.35
+  bitePitchRange: {x: 0.95, y: 1.05}
+--- !u!82 &1377930483
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377930477}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1434675173
 GameObject:
   m_ObjectHideFlags: 0
@@ -5451,7 +5559,7 @@ GameObject:
   - component: {fileID: 1434675176}
   - component: {fileID: 1434675175}
   m_Layer: 8
-  m_Name: PlatformWithTube2
+  m_Name: PlatformWithTube_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5585,7 +5693,7 @@ GameObject:
   - component: {fileID: 1458076282}
   - component: {fileID: 1458076281}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (26)
+  m_Name: PlatformWithTube_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5600,7 +5708,7 @@ Transform:
   m_GameObject: {fileID: 1458076279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.44, y: 13.54, z: 0}
+  m_LocalPosition: {x: 5.45, y: 11.81, z: 0}
   m_LocalScale: {x: 3.1894655, y: 12.930815, z: 8.079191}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5812,7 +5920,7 @@ GameObject:
   - component: {fileID: 1488489683}
   - component: {fileID: 1488489682}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (18)
+  m_Name: PlatformWithTube_25
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5827,7 +5935,7 @@ Transform:
   m_GameObject: {fileID: 1488489680}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.68, y: 17.21, z: 0}
+  m_LocalPosition: {x: 6.6640005, y: 16.08, z: 0}
   m_LocalScale: {x: 2.646882, y: 12.569301, z: 10.476219}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6038,7 +6146,7 @@ GameObject:
   - component: {fileID: 1511341378}
   - component: {fileID: 1511341379}
   m_Layer: 0
-  m_Name: Decor1 (6)
+  m_Name: Decor_bush_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6125,7 +6233,7 @@ GameObject:
   - component: {fileID: 1517152783}
   - component: {fileID: 1517152784}
   m_Layer: 0
-  m_Name: Decor1 (14)
+  m_Name: Decor1_wall3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6287,7 +6395,7 @@ Transform:
   m_GameObject: {fileID: 1548803360}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.38, y: -5.98, z: 0.02919447}
+  m_LocalPosition: {x: -0.02, y: -6.99, z: 0.02919447}
   m_LocalScale: {x: 6.318094, y: 6.318094, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6392,20 +6500,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfaeaa47e2524d91abe942fe0bcc507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropBigRock: 1
-  bigRockScaleOn: 1
-  bigRockScale: 2.5
-  bigRockTag: Untagged
-  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
-  dropSortingLayer: Default
-  dropOrderInLayer: 10
-  dropLocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  armEdibleDelay: 0.15
   stompsToKill: 2
+  stompCooldown: 0.15
+  flashOnHit: 1
+  hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
+  hitFlashTime: 0.08
   deathDuration: 0.45
   rockEdiblePrefab: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+  bigRockScaleOn: 1
+  bigRockScale: 2.5
+  dropLocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  dropSortingLayer: Default
+  dropOrderInLayer: 10
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
+  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
 --- !u!95 &1548803368
 Animator:
   serializedVersion: 7
@@ -6440,7 +6549,7 @@ GameObject:
   - component: {fileID: 1557699840}
   - component: {fileID: 1557699839}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (9)
+  m_Name: Barrel_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6574,7 +6683,7 @@ GameObject:
   - component: {fileID: 1579132710}
   - component: {fileID: 1579132709}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (11)
+  m_Name: PlatformWithTube_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6707,7 +6816,7 @@ GameObject:
   - component: {fileID: 1590406750}
   - component: {fileID: 1590406751}
   m_Layer: 0
-  m_Name: Decor1 (15)
+  m_Name: Decor1_wall5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6816,8 +6925,8 @@ Transform:
   m_GameObject: {fileID: 1625364443}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03, y: -7.01, z: 0.02919447}
-  m_LocalScale: {x: 2.7446053, y: 2.7446053, z: 0}
+  m_LocalPosition: {x: -11.78, y: -5.67, z: 0.02919447}
+  m_LocalScale: {x: 4.4426928, y: 4.4426928, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1977324005}
@@ -6857,20 +6966,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfaeaa47e2524d91abe942fe0bcc507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropBigRock: 1
-  bigRockScaleOn: 1
-  bigRockScale: 2.5
-  bigRockTag: Untagged
-  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
-  dropSortingLayer: Default
-  dropOrderInLayer: 10
-  dropLocalScale: {x: 1, y: 1, z: 1}
-  armEdibleDelay: 0.15
   stompsToKill: 2
+  stompCooldown: 0.15
+  flashOnHit: 1
+  hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
+  hitFlashTime: 0.08
   deathDuration: 0.45
   rockEdiblePrefab: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+  bigRockScaleOn: 1
+  bigRockScale: 2.5
+  dropLocalScale: {x: 1, y: 1, z: 1}
+  dropSortingLayer: Default
+  dropOrderInLayer: 10
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
+  fallbackDropSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
 --- !u!61 &1625364447
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7133,7 +7243,7 @@ GameObject:
   - component: {fileID: 1626324073}
   - component: {fileID: 1626324072}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (15)
+  m_Name: PlatformWithTube_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7266,7 +7376,7 @@ GameObject:
   - component: {fileID: 1632553217}
   - component: {fileID: 1632553218}
   m_Layer: 0
-  m_Name: Decor1 (12)
+  m_Name: Decor_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7353,7 +7463,7 @@ GameObject:
   - component: {fileID: 1651780147}
   - component: {fileID: 1651780148}
   m_Layer: 0
-  m_Name: Decor1 (11)
+  m_Name: Decor1_wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7458,16 +7568,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 605998876}
   - {fileID: 2066357674}
+  - {fileID: 605998876}
   - {fileID: 1202342409}
+  - {fileID: 1511341378}
   - {fileID: 1847953500}
+  - {fileID: 308826146}
+  - {fileID: 63010445}
   - {fileID: 1042038498}
   - {fileID: 912350136}
   - {fileID: 1164806511}
-  - {fileID: 308826146}
-  - {fileID: 63010445}
-  - {fileID: 1511341378}
   - {fileID: 626934172}
   - {fileID: 1651780147}
   - {fileID: 1632553217}
@@ -7505,7 +7615,7 @@ Transform:
   m_GameObject: {fileID: 1709028200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.081, y: -0.295, z: 0}
+  m_LocalPosition: {x: -0.081, y: -0.323, z: 0}
   m_LocalScale: {x: 0.48337582, y: 0.13909386, z: 0.77944195}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7574,6 +7684,11 @@ MonoBehaviour:
   minDownSpeed: -1
   bounceVelocity: 9
   postStompInvuln: 0.25
+  audioSource: {fileID: 0}
+  sfxAttack: {fileID: 8300000, guid: 0e42846bcaab643e4b8f4f814f93e4ff, type: 3}
+  sfxVolume: 1
+  pitchRange: {x: 0.95, y: 1.05}
+  cutOffAfterSeconds: 0
 --- !u!1 &1718642177
 GameObject:
   m_ObjectHideFlags: 0
@@ -7585,7 +7700,7 @@ GameObject:
   - component: {fileID: 1718642178}
   - component: {fileID: 1718642179}
   m_Layer: 0
-  m_Name: Decor1 (13)
+  m_Name: Decor1_wall3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7600,7 +7715,7 @@ Transform:
   m_GameObject: {fileID: 1718642177}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.44, y: 1.9900001, z: 0}
+  m_LocalPosition: {x: -14.72, y: 1.9900001, z: 0}
   m_LocalScale: {x: 11.624833, y: 11.90764, z: 11.90764}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7649,7 +7764,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 23
+  m_SortingOrder: 5
   m_Sprite: {fileID: 729131146814441392, guid: 574514fa5b50e4c92aca60e667362fae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5686275}
   m_FlipX: 0
@@ -7673,7 +7788,7 @@ GameObject:
   - component: {fileID: 1723591830}
   - component: {fileID: 1723591829}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (20)
+  m_Name: PlatformWithTube_24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7688,7 +7803,7 @@ Transform:
   m_GameObject: {fileID: 1723591827}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.68, y: 18.719997, z: 0}
+  m_LocalPosition: {x: 6.6640005, y: 18.59, z: 0}
   m_LocalScale: {x: 2.646882, y: 11.737095, z: 10.476219}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7807,7 +7922,7 @@ GameObject:
   - component: {fileID: 1828964428}
   - component: {fileID: 1828964427}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (7)
+  m_Name: PlatformWithTube_21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7822,7 +7937,7 @@ Transform:
   m_GameObject: {fileID: 1828964425}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.45, y: 15.54, z: 0}
+  m_LocalPosition: {x: 8.434, y: 15.410004, z: 0}
   m_LocalScale: {x: 2.646882, y: 22.007053, z: 10.476219}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7941,7 +8056,7 @@ GameObject:
   - component: {fileID: 1842271780}
   - component: {fileID: 1842271779}
   m_Layer: 8
-  m_Name: PlatformWithTube1 (3)
+  m_Name: PlatformWithTube_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8074,7 +8189,7 @@ GameObject:
   - component: {fileID: 1847953500}
   - component: {fileID: 1847953501}
   m_Layer: 0
-  m_Name: Decor1 (3)
+  m_Name: Decor_rock_big_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8089,7 +8204,7 @@ Transform:
   m_GameObject: {fileID: 1847953499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.31, y: -3.51, z: 0}
+  m_LocalPosition: {x: -0.51, y: -2.86, z: 0}
   m_LocalScale: {x: 5.1101, y: 5.1101, z: 5.1101}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8162,7 +8277,7 @@ GameObject:
   - component: {fileID: 1880245924}
   - component: {fileID: 1880245923}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (21)
+  m_Name: PlatformWithTube_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8177,7 +8292,7 @@ Transform:
   m_GameObject: {fileID: 1880245921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.08, y: 13.209999, z: 0}
+  m_LocalPosition: {x: 5.01, y: 11.35, z: 0}
   m_LocalScale: {x: 3.1894655, y: 12.930815, z: 8.079191}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8296,7 +8411,7 @@ GameObject:
   - component: {fileID: 1934889033}
   - component: {fileID: 1934889032}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (19)
+  m_Name: PlatformWithTube_28
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8723,7 +8838,7 @@ GameObject:
   - component: {fileID: 2000815080}
   - component: {fileID: 2000815079}
   m_Layer: 8
-  m_Name: PlatformWithTube1 (2)
+  m_Name: PlatformWithTube_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8738,7 +8853,7 @@ Transform:
   m_GameObject: {fileID: 2000815077}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.054443, y: 6.5942855, z: 0}
+  m_LocalPosition: {x: 9.824444, y: 6.5942855, z: 0}
   m_LocalScale: {x: 8.310883, y: 9.97306, z: 8.310883}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8857,7 +8972,7 @@ GameObject:
   - component: {fileID: 2049713943}
   - component: {fileID: 2049713942}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (6)
+  m_Name: PlatformWithTube_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8990,7 +9105,7 @@ GameObject:
   - component: {fileID: 2066357674}
   - component: {fileID: 2066357675}
   m_Layer: 0
-  m_Name: Decor1 (1)
+  m_Name: Decor_computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9005,7 +9120,7 @@ Transform:
   m_GameObject: {fileID: 2066357673}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.92, y: -7.35, z: 0}
+  m_LocalPosition: {x: 2.22, y: -5.59, z: 0}
   m_LocalScale: {x: 7.5491505, y: 7.5491505, z: 7.5491505}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9078,7 +9193,7 @@ GameObject:
   - component: {fileID: 2091737770}
   - component: {fileID: 2091737769}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (14)
+  m_Name: PlatformWithTube_23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9093,7 +9208,7 @@ Transform:
   m_GameObject: {fileID: 2091737767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.392, y: 18.71, z: 0}
+  m_LocalPosition: {x: 8.376, y: 18.580002, z: 0}
   m_LocalScale: {x: 3.3019853, y: 10.981519, z: 13.069083}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9212,7 +9327,7 @@ GameObject:
   - component: {fileID: 2136809213}
   - component: {fileID: 2136809212}
   m_Layer: 8
-  m_Name: PlatformWithTube2 (8)
+  m_Name: PlatformWithTube_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

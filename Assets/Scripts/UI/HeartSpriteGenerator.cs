@@ -2,12 +2,8 @@ using UnityEngine;
 
 public static class HeartSpriteGenerator
 {
-    // Pixel-art heart built from a tiny bitmap (Point-filtered, crisp edges)
-    // 'pixelSize' = how many texture pixels per 1 logical pixel of the bitmap (e.g., 8, 12, 16)
     public static Sprite CreatePixelHeartSprite(int pixelSize = 8, int pixelsPerUnit = 64)
     {
-        // bitmap (X = filled, . = transparent)
-        // width=10, height=8  -> nice classic heart
         string[] rows = new[]
         {
             "..XX..XX..",
@@ -17,7 +13,7 @@ public static class HeartSpriteGenerator
             ".XXXXXXXX.",
             "..XXXXXX..",
             "...XXXX...",
-            "....XX...."
+            "....XX....",
         };
 
         int w = rows[0].Length;
