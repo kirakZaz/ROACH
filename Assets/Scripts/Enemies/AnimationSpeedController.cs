@@ -9,6 +9,9 @@ namespace Roach.Assets.Scripts.Player
     public class AnimationSpeedController : MonoBehaviour
     {
         public float animationSpeed = 0.5f; // 1 = normal, 0.5 = half speed
+        
+        [Header("Move")]
+        public float moveSpeed = 6f;
 
         private Animator animator;
 

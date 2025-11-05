@@ -47,12 +47,12 @@ public class PlayerController2D : MonoBehaviour
     public AudioClip sfxBackground; // ← assign Toxic_Crunch.wav here
 
     [Range(0f, 1f)]
-    public float backgroundVolume = 0.2f;
+    public float backgroundVolume = 1f;
     public bool persistBackgroundAcrossScenes = true;
 
     [Header("Audio (Stomp Only)")]
     public AudioClip sfxAttack; // Assign Player_Attack(.wav or _Short)
-    public float stompBounceForce = 8f; // Upward bounce after a stomp
+    public float stompBounceForce = 1f; // Upward bounce after a stomp
     public LayerMask enemyLayer; // Set to your enemy layer (optional if using tag)
     public bool requireDownwardVelocity = true; // Only count stomp if we were falling
 
