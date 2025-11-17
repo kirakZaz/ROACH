@@ -19,7 +19,6 @@ public class WichettyBagUI : MonoBehaviour
     [SerializeField]
     private GameObject panel;
 
-    // храним количества отдельно от строк
     private readonly Dictionary<WichettyItem, int> counts = new();
     private readonly Dictionary<WichettyItem, WichettyBagUIRow> rows = new();
 
@@ -48,17 +47,17 @@ public class WichettyBagUI : MonoBehaviour
         if (item == null || amount <= 0)
             return;
 
-    if (lastAddedItem == item && Time.time - lastAddTime < 0.1f)
-        return;
+        if (lastAddedItem == item && Time.time - lastAddTime < 0.1f)
+            return;
 
-    lastAddedItem = item;
-    lastAddTime = Time.time;
+        lastAddedItem = item;
+        lastAddTime = Time.time;
 
         Debug.Log(
             $"[BagUI] Adding {amount}x {item.DisplayName}. Current count: {(counts.ContainsKey(item) ? counts[item] : 0)}"
         );
 
-        // обновляем количество
+    
         if (!counts.ContainsKey(item))
             counts[item] = 0;
 
@@ -66,13 +65,12 @@ public class WichettyBagUI : MonoBehaviour
 
         Debug.Log($"[BagUI] New total count: {counts[item]}x {item.DisplayName}");
 
-    
         if (panel != null && panel.activeSelf)
             CreateOrUpdateRow(item, counts[item]);
     }
 
-private WichettyItem lastAddedItem;
-private float lastAddTime;
+    private WichettyItem lastAddedItem;
+    private float lastAddTime;
 
     public void Remove(WichettyItem item, int amount)
     {
@@ -90,25 +88,21 @@ private float lastAddTime;
         }
 
         counts[item] -= amount;
-
-        // если количество стало 0 или меньше — удаляем полностью
-        if (counts[item] <= 0)
+     if (counts[item] <= 0)
         {
             counts.Remove(item);
-            
-            // удаляем строку из UI
+
             if (rows.TryGetValue(item, out var row) && row != null)
                 Destroy(row.gameObject);
-            
+
             rows.Remove(item);
-            
+
             Debug.Log($"[BagUI] Removed {item.DisplayName} completely from inventory");
         }
         else
         {
             Debug.Log($"[BagUI] New total count: {counts[item]}x {item.DisplayName}");
-            
-            // обновляем счётчик если панель открыта
+
             if (panel != null && panel.activeSelf && rows.TryGetValue(item, out var row))
                 row.SetData(item, counts[item]);
         }
@@ -140,13 +134,11 @@ private float lastAddTime;
         row.SetData(item, count);
     }
 
-    // Опционально: получить количество предмета
     public int GetCount(WichettyItem item)
     {
         return counts.ContainsKey(item) ? counts[item] : 0;
     }
 
-    // Опционально: проверить есть ли предмет
     public bool HasItem(WichettyItem item, int amount = 1)
     {
         return counts.ContainsKey(item) && counts[item] >= amount;

@@ -40,7 +40,7 @@ public class StompableEnemy : MonoBehaviour, IStompable
     private Vector2 dropOffset = new Vector2(0f, -0.05f);
 
     [SerializeField, Tooltip("Small upward nudge to avoid spawning inside ground")]
-    private float dropLift = 0.06f;
+    private float dropLift = 2f;
 
     // ---- internals ----
     private int stompCount = 0;
@@ -176,14 +176,12 @@ public class StompableEnemy : MonoBehaviour, IStompable
 
         float direction = transform.localScale.x >= 0 ? -1f : 1f;
 
-        // Спавним каждый дроп
         for (int i = 0; i < dropItems.Count; i++)
         {
             DropItem dropConfig = dropItems[i];
             if (!dropConfig.prefab)
                 continue;
 
-            // Смещаем позицию если несколько дропов (чтобы не спавнились в одном месте)
             float offsetX = (i - dropItems.Count / 2f) * 0.3f;
             Vector3 spawnPos =
                 transform.position + new Vector3(direction * 0.35f + offsetX, 0.35f + dropLift, 0f);
@@ -196,23 +194,28 @@ public class StompableEnemy : MonoBehaviour, IStompable
             }
             catch { }
 
-            // Sprite
+            // Sprite - ИСПРАВЛЕНО: всегда применяй fallback если указан
             var sr = drop.GetComponentInChildren<SpriteRenderer>();
             if (!sr)
                 sr = drop.AddComponent<SpriteRenderer>();
-            if (sr && sr.sprite == null && dropConfig.fallbackSprite)
-                sr.sprite = dropConfig.fallbackSprite;
+
             if (sr)
             {
+                // ВСЕГДА применяй fallback спрайт если он есть
+                if (dropConfig.fallbackSprite)
+                    sr.sprite = dropConfig.fallbackSprite;
+
                 sr.sortingLayerName = dropConfig.sortingLayer;
                 sr.sortingOrder = dropConfig.orderInLayer;
+                sr.enabled = true; // Убедись что SpriteRenderer включен
+
                 var c = sr.color;
                 c.a = 1f;
                 sr.color = c;
             }
 
             // Scale
-            float finalScale = dropConfig.bigScale ? dropConfig.bigScaleValue : 1f;
+            float finalScale = dropConfig.bigScale ? dropConfig.bigScaleValue : 2f;
             drop.transform.localScale = dropConfig.localScale * finalScale;
 
             // Collider
@@ -229,7 +232,6 @@ public class StompableEnemy : MonoBehaviour, IStompable
             rb.gravityScale = 2f;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-            // Небольшая вариация в траектории
             float velocityVariance = (i - dropItems.Count / 2f) * 0.5f;
             rb.linearVelocity = new Vector2(direction * 1.8f + velocityVariance, 2.5f);
 

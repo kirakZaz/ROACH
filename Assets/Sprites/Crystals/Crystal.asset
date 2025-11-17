@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f665a0952e3d48f0b4197a3d2716a37, type: 3}
   m_Name: Crystal
   m_EditorClassIdentifier: Assembly-CSharp::WichettyItem
-  displayName: Small Rock
-  icon: {fileID: 0}
+  displayName: A shiny crystal
+  icon: {fileID: 5293031974318352618, guid: 65f5c1bde99264871933b866bf19b0ff, type: 3}
   baseAmount: 1

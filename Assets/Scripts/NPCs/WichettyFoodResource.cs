@@ -6,28 +6,27 @@ public class WichettyFoodResource : MonoBehaviour
     [SerializeField]
     private WichettyItem item;
 
-    [SerializeField]
+    [SerializeField, Min(1)]
     private int amount = 1;
 
-    [SerializeField]
-    private float lifetime = 10f;
-
-    public WichettyItem Item => item;
-    public int Amount => amount;
-
     private bool isBeingEaten = false;
+
+    public WichettyItem Item
+    {
+        get => item;
+        set => item = value;
+    }
+
+    public int Amount
+    {
+        get => amount;
+        set => amount = Mathf.Max(1, value);
+    }
+
     public bool IsBeingEaten
     {
         get => isBeingEaten;
         set => isBeingEaten = value;
     }
 
-    private void Awake()
-    {
-        var col = GetComponent<Collider2D>();
-        col.isTrigger = true;
-
-        if (lifetime > 0f)
-            Destroy(gameObject, lifetime);
-    }
 }
