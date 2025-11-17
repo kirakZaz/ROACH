@@ -50,6 +50,14 @@ public class PlayerController2D : MonoBehaviour
     public float backgroundVolume = 1f;
     public bool persistBackgroundAcrossScenes = true;
 
+    [Header("Footstep Audio")]
+    public AudioClip sfxFootstep;
+
+    [Range(0f, 1f)]
+    public float footstepVolume = 0.6f;
+    public float footstepInterval = 0.35f; // how often to play when moving
+    private float footstepTimer;
+
     [Header("Audio (Stomp Only)")]
     public AudioClip sfxAttack; // Assign Player_Attack(.wav or _Short)
     public float stompBounceForce = 1f; // Upward bounce after a stomp
@@ -259,6 +267,7 @@ public class PlayerController2D : MonoBehaviour
             StartCoroutine(ReloadAfterFail());
 
         wasGrounded = isGrounded;
+        HandleFootsteps();
 
         // Keep background volume synced with inspector changes (optional)
         if (bgSource)
@@ -295,6 +304,35 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    private void HandleFootsteps()
+    {
+        // must have audio and clip
+        if (!audioSrc || sfxFootstep == null)
+            return;
+
+        // must be on ground and moving horizontally
+        bool isMoving = Mathf.Abs(horizontal) > 0.1f;
+        if (isGrounded && isMoving)
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                // small pitch random for variety
+                float oldPitch = audioSrc.pitch;
+                audioSrc.pitch = Random.Range(0.97f, 1.03f);
+                audioSrc.PlayOneShot(sfxFootstep, footstepVolume);
+                audioSrc.pitch = oldPitch;
+
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            // reset so it plays quickly after you start moving again
+            footstepTimer = 0f;
+        }
+    }
+
     // ----- STOMP DETECTION -----
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -319,7 +357,7 @@ public class PlayerController2D : MonoBehaviour
             return;
 
         // Stomp confirmed: play attack sfx + bounce
-        PlayOneShot(sfxAttack, 1f);
+        // PlayOneShot(sfxAttack, 1f);
 
         var v = rb.linearVelocity;
         v.y = 0f;

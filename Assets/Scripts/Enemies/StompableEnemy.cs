@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -7,7 +8,7 @@ public class StompableEnemy : MonoBehaviour, IStompable
 {
     [Header("Health")]
     [SerializeField, Min(1)]
-    private int stompsToKill = 2; // ← edit in Inspector
+    private int stompsToKill = 2;
 
     [
         SerializeField,
@@ -15,7 +16,7 @@ public class StompableEnemy : MonoBehaviour, IStompable
             "Ignore additional stomps for this time after a valid stomp to avoid multi-counts from the same contact."
         )
     ]
-    private float stompCooldown = 0.15f; // avoids duplicate counts while still on top
+    private float stompCooldown = 0.15f;
 
     [Header("Partial Hit Feedback")]
     [SerializeField]
@@ -33,31 +34,13 @@ public class StompableEnemy : MonoBehaviour, IStompable
 
     [Header("Drop On Death")]
     [SerializeField]
-    private GameObject rockEdiblePrefab;
-
-    [SerializeField]
-    private bool bigRockScaleOn = true;
-
-    [SerializeField, Range(0.5f, 4f)]
-    private float bigRockScale = 2.5f;
-
-    [SerializeField]
-    private Vector3 dropLocalScale = Vector3.one;
-
-    [SerializeField]
-    private string dropSortingLayer = "Default";
-
-    [SerializeField]
-    private int dropOrderInLayer = 10;
+    private List<DropItem> dropItems = new List<DropItem>();
 
     [SerializeField]
     private Vector2 dropOffset = new Vector2(0f, -0.05f);
 
     [SerializeField, Tooltip("Small upward nudge to avoid spawning inside ground")]
     private float dropLift = 0.06f;
-
-    [SerializeField]
-    private Sprite fallbackDropSprite;
 
     // ---- internals ----
     private int stompCount = 0;
@@ -70,6 +53,20 @@ public class StompableEnemy : MonoBehaviour, IStompable
 
     private Color initialColor = Color.white;
     private Vector3 initialScale;
+
+    [System.Serializable]
+    public class DropItem
+    {
+        public GameObject prefab;
+        public bool bigScale = true;
+
+        [Range(0.5f, 4f)]
+        public float bigScaleValue = 2.5f;
+        public Vector3 localScale = Vector3.one;
+        public string sortingLayer = "Default";
+        public int orderInLayer = 10;
+        public Sprite fallbackSprite;
+    }
 
     private void Awake()
     {
@@ -113,15 +110,11 @@ public class StompableEnemy : MonoBehaviour, IStompable
         if (isDying)
             return;
 
-        // cooldown to prevent multiple counts from one continuous contact
         if (Time.time - lastStompTime < stompCooldown)
             return;
         lastStompTime = Time.time;
 
         stompCount++;
-
-        // debug (optional)
-        // Debug.Log($"[{name}] stomp {stompCount}/{stompsToKill}");
 
         if (stompCount >= stompsToKill)
         {
@@ -147,7 +140,6 @@ public class StompableEnemy : MonoBehaviour, IStompable
     {
         isDying = true;
 
-        // Stop blocking the player during death
         if (enemyCollider)
             enemyCollider.enabled = false;
         if (enemyRb)
@@ -173,66 +165,81 @@ public class StompableEnemy : MonoBehaviour, IStompable
             yield return null;
         }
 
-        SpawnDropIfAny();
+        SpawnDrops();
         Destroy(gameObject);
     }
 
-    private void SpawnDropIfAny()
+    private void SpawnDrops()
     {
-        if (!rockEdiblePrefab)
+        if (dropItems == null || dropItems.Count == 0)
             return;
 
         float direction = transform.localScale.x >= 0 ? -1f : 1f;
-        Vector3 spawnPos =
-            transform.position + new Vector3(direction * 0.35f, 0.35f + dropLift, 0f);
 
-        GameObject drop = Instantiate(rockEdiblePrefab, spawnPos, Quaternion.identity);
-
-        // Always edible/tagged
-        try
+        // Спавним каждый дроп
+        for (int i = 0; i < dropItems.Count; i++)
         {
-            drop.tag = "Edible";
+            DropItem dropConfig = dropItems[i];
+            if (!dropConfig.prefab)
+                continue;
+
+            // Смещаем позицию если несколько дропов (чтобы не спавнились в одном месте)
+            float offsetX = (i - dropItems.Count / 2f) * 0.3f;
+            Vector3 spawnPos =
+                transform.position + new Vector3(direction * 0.35f + offsetX, 0.35f + dropLift, 0f);
+
+            GameObject drop = Instantiate(dropConfig.prefab, spawnPos, Quaternion.identity);
+
+            try
+            {
+                drop.tag = "Edible";
+            }
+            catch { }
+
+            // Sprite
+            var sr = drop.GetComponentInChildren<SpriteRenderer>();
+            if (!sr)
+                sr = drop.AddComponent<SpriteRenderer>();
+            if (sr && sr.sprite == null && dropConfig.fallbackSprite)
+                sr.sprite = dropConfig.fallbackSprite;
+            if (sr)
+            {
+                sr.sortingLayerName = dropConfig.sortingLayer;
+                sr.sortingOrder = dropConfig.orderInLayer;
+                var c = sr.color;
+                c.a = 1f;
+                sr.color = c;
+            }
+
+            // Scale
+            float finalScale = dropConfig.bigScale ? dropConfig.bigScaleValue : 1f;
+            drop.transform.localScale = dropConfig.localScale * finalScale;
+
+            // Collider
+            var col = drop.GetComponent<Collider2D>();
+            if (!col)
+                col = drop.AddComponent<CircleCollider2D>();
+            col.isTrigger = false;
+
+            // Rigidbody
+            var rb = drop.GetComponent<Rigidbody2D>();
+            if (!rb)
+                rb = drop.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 2f;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            // Небольшая вариация в траектории
+            float velocityVariance = (i - dropItems.Count / 2f) * 0.5f;
+            rb.linearVelocity = new Vector2(direction * 1.8f + velocityVariance, 2.5f);
+
+            if (!drop.GetComponent<FreezeOnGround>())
+                drop.AddComponent<FreezeOnGround>();
         }
-        catch { }
-
-        // Sprite
-        var sr = drop.GetComponentInChildren<SpriteRenderer>();
-        if (!sr)
-            sr = drop.AddComponent<SpriteRenderer>();
-        if (sr && sr.sprite == null && fallbackDropSprite)
-            sr.sprite = fallbackDropSprite;
-        if (sr)
-        {
-            sr.sortingLayerName = dropSortingLayer;
-            sr.sortingOrder = dropOrderInLayer;
-            var c = sr.color;
-            c.a = 1f;
-            sr.color = c;
-        }
-
-        // Scale/collider/rigidbody
-        drop.transform.localScale = dropLocalScale * (bigRockScaleOn ? bigRockScale : 1f);
-
-        var col = drop.GetComponent<Collider2D>();
-        if (!col)
-            col = drop.AddComponent<CircleCollider2D>();
-        col.isTrigger = false;
-
-        var rb = drop.GetComponent<Rigidbody2D>();
-        if (!rb)
-            rb = drop.AddComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = 2f;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        rb.linearVelocity = new Vector2(direction * 1.8f, 2.5f);
-
-        if (!drop.GetComponent<FreezeOnGround>())
-            drop.AddComponent<FreezeOnGround>();
     }
 
     private void OnDrawGizmosSelected()
     {
-        // (optional visual) show small dot where drop spawns
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position + (Vector3)dropOffset, 0.08f);
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(AudioSource))] // ← добавили
+[RequireComponent(typeof(AudioSource))]
 [DisallowMultipleComponent]
 public class WhitchettyAI : MonoBehaviour
 {
@@ -80,6 +80,19 @@ public class WhitchettyAI : MonoBehaviour
     [SerializeField]
     private Vector2 bitePitchRange = new Vector2(0.95f, 1.05f);
 
+    // ---------- UI ----------
+
+
+    [Header("UI / Inventory")]
+    [SerializeField]
+    private WichettyBagUI wichettyBagUI;
+
+    [SerializeField]
+    private WichettyItem defaultItem;
+
+    [SerializeField]
+    private int defaultFoodAmount = 1;
+
     private Rigidbody2D rb;
     private Collider2D selfCol;
     private State state = State.Follow;
@@ -87,7 +100,6 @@ public class WhitchettyAI : MonoBehaviour
     private bool isEating;
     private Coroutine eatRoutineHandle;
 
-    // audio
     private AudioSource audioSrc;
     private Coroutine biteLoopCo;
 
@@ -99,6 +111,7 @@ public class WhitchettyAI : MonoBehaviour
 
         if (!spriteRenderer)
             spriteRenderer = GetComponent<SpriteRenderer>();
+
         if (!player)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
@@ -109,7 +122,7 @@ public class WhitchettyAI : MonoBehaviour
         audioSrc.playOnAwake = false;
         audioSrc.spatialBlend = 0f;
         audioSrc.loop = false;
-        audioSrc.volume = 1f;
+        audioSrc.volume = 0.5f;
 
         SetWalkVisual();
     }
@@ -212,7 +225,7 @@ public class WhitchettyAI : MonoBehaviour
         }
     }
 
-    private IEnumerator EatRoutine()
+    private System.Collections.IEnumerator EatRoutine()
     {
         if (!currentFood)
         {
@@ -221,8 +234,26 @@ public class WhitchettyAI : MonoBehaviour
             yield break;
         }
 
+        Debug.Log("[Pet] Starting to eat!");
+
         state = State.Eating;
         isEating = true;
+
+        // --- detect what we're eating ---
+        WichettyItem eatenItem = defaultItem;
+        int eatenAmount = defaultFoodAmount;
+
+        var foodRes = currentFood.GetComponent<WichettyFoodResource>();
+        if (foodRes != null)
+        {
+            // Отмечаем что пет ест это!
+            foodRes.IsBeingEaten = true;
+            Debug.Log("[Pet] Marked resource as IsBeingEaten = true");
+            
+            if (foodRes.Item != null)
+                eatenItem = foodRes.Item;
+            eatenAmount = foodRes.Amount;
+        }
 
         if (faceTargetWhenEating && spriteRenderer)
             spriteRenderer.flipX = (currentFood.position.x < transform.position.x);
@@ -230,6 +261,7 @@ public class WhitchettyAI : MonoBehaviour
         SetEatVisual();
         StartEatSound();
 
+        // your old eat logic
         var edible = currentFood.GetComponent<Edible>();
         if (edible != null)
         {
@@ -248,6 +280,17 @@ public class WhitchettyAI : MonoBehaviour
             }
             if (currentFood)
                 Destroy(currentFood.gameObject);
+        }
+
+        // Добавляем в мешок
+        if (wichettyBagUI != null && eatenItem != null)
+        {
+            wichettyBagUI.Add(eatenItem, eatenAmount);
+            Debug.Log($"[Pet] +{eatenAmount} x {eatenItem.DisplayName}");
+        }
+        else
+        {
+            Debug.LogWarning("[EatRoutine] Could not add to bag!");
         }
 
         StopEatSound();

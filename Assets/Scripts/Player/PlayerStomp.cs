@@ -24,6 +24,7 @@ public class PlayerStomp : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField]
+    private bool playStompSfx = true;
     private AudioSource audioSource; // ← assign Player's AudioSource or leave null to auto-find
 
     [SerializeField]
@@ -31,7 +32,7 @@ public class PlayerStomp : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    private float sfxVolume = 1f;
+    private float sfxVolume = 0.5f;
 
     [SerializeField]
     private Vector2 pitchRange = new Vector2(0.95f, 1.05f);
