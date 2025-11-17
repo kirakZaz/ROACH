@@ -148,7 +148,7 @@ RectTransform:
   m_GameObject: {fileID: 1945301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.627338, y: 0.4671875, z: 1}
+  m_LocalScale: {x: 6.03184, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 718747174}
@@ -156,7 +156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 80, y: 32}
+  m_AnchoredPosition: {x: 74.2, y: 32}
   m_SizeDelta: {x: -1212, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1945303
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.12941177}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.02745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1129,15 +1129,15 @@ MonoBehaviour:
   hitFlashTime: 0.08
   deathDuration: 0.45
   dropItems:
-  - prefab: {fileID: 8841100040005651908, guid: 677d1bfda08094f0cb7ad8bedb3c7e8b, type: 3}
-    bigScale: 1
-    bigScaleValue: 4
-    localScale: {x: 1, y: 1, z: 1}
+  - prefab: {fileID: 1053036520765657717, guid: ee28280d8c5924f74ad935e43446def4, type: 3}
+    bigScale: 0
+    bigScaleValue: 0.5
+    localScale: {x: 0.5, y: 0.5, z: 0.5}
     sortingLayer: 
     orderInLayer: 20
-    fallbackSprite: {fileID: 21300000, guid: 65f5c1bde99264871933b866bf19b0ff, type: 3}
-  dropOffset: {x: 0.12, y: 0.1}
-  dropLift: 0.78
+    fallbackSprite: {fileID: 21300000, guid: b362040b379864a5098fe5b15926e811, type: 3}
+  dropOffset: {x: 0, y: -0.07}
+  dropLift: 0.11
 --- !u!61 &72499111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2239,7 +2239,14 @@ MonoBehaviour:
   hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
   hitFlashTime: 0.08
   deathDuration: 0.45
-  dropItems: []
+  dropItems:
+  - prefab: {fileID: 8841100040005651908, guid: 677d1bfda08094f0cb7ad8bedb3c7e8b, type: 3}
+    bigScale: 0
+    bigScaleValue: 0
+    localScale: {x: 0, y: 0, z: 0}
+    sortingLayer: 
+    orderInLayer: 0
+    fallbackSprite: {fileID: 21300000, guid: 5d18dd44b8aeb4109a25f9e6f31cd652, type: 3}
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
 --- !u!61 &142050850
@@ -5369,25 +5376,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.24, y: 0.2}
   m_EdgeRadius: 0
---- !u!1 &444415843 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
-  m_PrefabInstance: {fileID: 1546116881790665394}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &444415848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444415843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1588eb5a0a47549af94d85c56a1f36c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WichettyFoodResource
-  item: {fileID: 11400000, guid: 8a8a0f2f032a241cda19299a833ab497, type: 2}
-  amount: 1
 --- !u!1 &451424691
 GameObject:
   m_ObjectHideFlags: 0
@@ -7250,7 +7238,14 @@ MonoBehaviour:
   hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
   hitFlashTime: 0.08
   deathDuration: 0.45
-  dropItems: []
+  dropItems:
+  - prefab: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+    bigScale: 0
+    bigScaleValue: 0
+    localScale: {x: 1, y: 1, z: 1}
+    sortingLayer: 
+    orderInLayer: 0
+    fallbackSprite: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
 --- !u!61 &566604534
@@ -9292,7 +9287,6 @@ GameObject:
   - component: {fileID: 718747178}
   - component: {fileID: 718747177}
   - component: {fileID: 718747176}
-  - component: {fileID: 718747175}
   m_Layer: 5
   m_Name: ListRoot
   m_TagString: Untagged
@@ -9309,30 +9303,16 @@ RectTransform:
   m_GameObject: {fileID: 718747173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8375, y: 1.175, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1945302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14.409973, y: -0.37599182}
-  m_SizeDelta: {x: 0, y: -16}
+  m_AnchoredPosition: {x: -12.5, y: -0.37599182}
+  m_SizeDelta: {x: -84.95703, y: -16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &718747175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718747173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!114 &718747176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9351,10 +9331,10 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: 8
+  m_Spacing: 10
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -9382,7 +9362,7 @@ MonoBehaviour:
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
-  m_FillCenter: 1
+  m_FillCenter: 0
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
@@ -15526,7 +15506,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.65
+  m_Radius: 0.5
 --- !u!50 &1377930479
 Rigidbody2D:
   serializedVersion: 5
@@ -15542,7 +15522,7 @@ Rigidbody2D:
   m_Mass: 0.5
   m_LinearDamping: 0
   m_AngularDamping: 0.98
-  m_GravityScale: 3.3
+  m_GravityScale: 2.94
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -18396,7 +18376,14 @@ MonoBehaviour:
   hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
   hitFlashTime: 0.08
   deathDuration: 0.45
-  dropItems: []
+  dropItems:
+  - prefab: {fileID: 1053036520765657717, guid: ee28280d8c5924f74ad935e43446def4, type: 3}
+    bigScale: 0
+    bigScaleValue: 0
+    localScale: {x: 1, y: 1, z: 1}
+    sortingLayer: 
+    orderInLayer: 0
+    fallbackSprite: {fileID: 21300000, guid: 5d18dd44b8aeb4109a25f9e6f31cd652, type: 3}
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
 --- !u!95 &1548803368
@@ -25222,6 +25209,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Edible
       objectReference: {fileID: 0}
+    - target: {fileID: 3557505138276925535, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a8a0f2f032a241cda19299a833ab497, type: 2}
     - target: {fileID: 5573418379050213030, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_Radius
       value: 0.06
@@ -25240,11 +25231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6435144794077784081, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: -14.8
       objectReference: {fileID: 0}
     - target: {fileID: 6435144794077784081, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.56
+      value: -5.92
       objectReference: {fileID: 0}
     - target: {fileID: 6435144794077784081, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25281,10 +25272,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1053036520765657717, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 444415848}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccef261b514224ba783f5bb1279fb0c9, type: 3}
 --- !u!1001 &1975677923103679351
 PrefabInstance:

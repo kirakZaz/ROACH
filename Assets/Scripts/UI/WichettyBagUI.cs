@@ -27,7 +27,7 @@ public class WichettyBagUI : MonoBehaviour
         Instance = this;
 
         if (panel != null)
-            panel.SetActive(false);
+            panel.SetActive(true);
         if (bagButton != null)
             bagButton.onClick.AddListener(TogglePanel);
     }

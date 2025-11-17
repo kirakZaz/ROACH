@@ -29,8 +29,9 @@ public class WichettyCollector : MonoBehaviour
     {
         if (wichettyBagUI == null)
         {
-            wichettyBagUI = WichettyBagUI.Instance 
-                            ?? FindAnyObjectByType<WichettyBagUI>(FindObjectsInactive.Include);
+            wichettyBagUI =
+                WichettyBagUI.Instance
+                ?? FindAnyObjectByType<WichettyBagUI>(FindObjectsInactive.Include);
         }
 
         if (wichettyBagUI == null)
@@ -42,7 +43,8 @@ public class WichettyCollector : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
 
         triggerCol = GetComponent<Collider2D>();
-        if (triggerCol != null) triggerCol.isTrigger = true;
+        if (triggerCol == null)
+            triggerCol.isTrigger = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -56,7 +58,6 @@ public class WichettyCollector : MonoBehaviour
         if (!resource || !resource.gameObject.activeInHierarchy)
             return;
 
-        // НЕ подбираем если пет ест!
         Debug.Log($"[Collector] Found resource, IsBeingEaten = {resource.IsBeingEaten}");
         if (resource.IsBeingEaten)
         {
