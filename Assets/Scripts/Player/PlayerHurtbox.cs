@@ -1,11 +1,12 @@
 using System.Collections;
+using Roach.Assets.Scripts.Hazards;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Roach.Assets.Scripts.Player
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(Collider2D))] // trigger on child
+    [RequireComponent(typeof(Collider2D))]
     public class PlayerHurtbox : MonoBehaviour
     {
         [Header("Detection")]
@@ -30,8 +31,15 @@ namespace Roach.Assets.Scripts.Player
         [SerializeField]
         private SpriteRenderer spriteRenderer; // blink target (usually on Player root)
 
+        [SerializeField]
+        private Color damageColor = new Color(1f, 0.3f, 0.3f, 1f); // red tint
+
+        [SerializeField]
+        private float flashDuration = 0.1f; // how long each flash lasts
+
         private Rigidbody2D rb; // Player root RB
         private bool isInvulnerable;
+        private Color originalColor;
 
         private void Awake()
         {
@@ -45,19 +53,43 @@ namespace Roach.Assets.Scripts.Player
                 Debug.LogError("PlayerHurtbox: Rigidbody2D not found in parent Player.", this);
             if (!playerLives)
                 Debug.LogError("PlayerHurtbox: PlayerLives not found in parent Player.", this);
+
+            if (spriteRenderer)
+                originalColor = spriteRenderer.color;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (isInvulnerable)
                 return;
-            if (!other.CompareTag(enemyTag))
-                return;
             if (!rb || !playerLives)
                 return;
 
-            // lose one life
-            playerLives.LoseLife(1);
+            int damage = 0;
+
+            // Check for spike component first
+            var spike = other.GetComponent<Spike>();
+            if (spike != null)
+            {
+                damage = spike.Damage;
+            }
+            // Then check for enemy tag
+            else if (other.CompareTag(enemyTag))
+            {
+                damage = 1; // default enemy damage
+            }
+            // Check for hazard tag (fallback for other hazards)
+            else if (other.CompareTag("Hazard"))
+            {
+                damage = 1; // default hazard damage
+            }
+
+            // If nothing matched, ignore this collision
+            if (damage == 0)
+                return;
+
+            // Apply damage
+            playerLives.LoseLife(damage);
 
             // if no lives left -> reload
             if (playerLives.CurrentLives <= 0)
@@ -88,15 +120,22 @@ namespace Roach.Assets.Scripts.Player
 
             if (spriteRenderer)
             {
-                const float period = 0.1f;
                 float t = 0f;
                 while (t < hurtInvulnerability)
                 {
-                    spriteRenderer.enabled = !spriteRenderer.enabled;
-                    yield return new WaitForSeconds(period);
-                    t += period;
+                    // Flash red
+                    spriteRenderer.color = damageColor;
+                    yield return new WaitForSeconds(flashDuration);
+
+                    // Back to normal
+                    spriteRenderer.color = originalColor;
+                    yield return new WaitForSeconds(flashDuration);
+
+                    t += flashDuration * 2f;
                 }
-                spriteRenderer.enabled = true;
+
+                // Ensure we end on normal color
+                spriteRenderer.color = originalColor;
             }
             else
             {
