@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f665a0952e3d48f0b4197a3d2716a37, type: 3}
+  m_Name: SmallRock
+  m_EditorClassIdentifier: Assembly-CSharp::WichettyItem
+  displayName: Small Rock
+  icon: {fileID: 3603384549431281353, guid: 799c0378447f24edc9389a04e9409ef9, type: 3}
+  baseAmount: 1
