@@ -20,7 +20,6 @@ public class FreezeOnGround : MonoBehaviour
         // check layer or tag
         if (
             collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground")
-            || collision.collider.CompareTag("Ground")
         )
         {
             landed = true;

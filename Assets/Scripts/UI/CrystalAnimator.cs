@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class CrystalAnimator : MonoBehaviour
 {
-    [SerializeField] private Sprite[] frames;
-    [SerializeField] private float frameRate = 0.1f; // How long each frame shows
-    
+    [SerializeField]
+    private Sprite[] frames;
+
+    [SerializeField]
+    private float frameRate = 0.1f; // How long each frame shows
+
     private SpriteRenderer spriteRenderer;
     private float timer;
     private int currentFrame;
@@ -22,7 +25,7 @@ public class CrystalAnimator : MonoBehaviour
             return;
 
         timer += Time.deltaTime;
-        
+
         if (timer >= frameRate)
         {
             currentFrame = (currentFrame + 1) % frames.Length;

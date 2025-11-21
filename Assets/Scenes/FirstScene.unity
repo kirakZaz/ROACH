@@ -24616,7 +24616,14 @@ MonoBehaviour:
   hitFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
   hitFlashTime: 0.08
   deathDuration: 0.45
-  dropItems: []
+  dropItems:
+  - prefab: {fileID: 0}
+    bigScale: 0
+    bigScaleValue: 0
+    localScale: {x: 0, y: 0, z: 0}
+    sortingLayer: 
+    orderInLayer: 0
+    fallbackSprite: {fileID: 0}
   dropOffset: {x: 0, y: -0.05}
   dropLift: 0.06
 --- !u!61 &2106076423
