@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "ROACH-main.slnx"
+    "dotnet.defaultSolution": "Roach.slnx"
 }
