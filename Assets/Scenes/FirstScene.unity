@@ -67697,6 +67697,7 @@ GameObject:
   - component: {fileID: 103153177}
   - component: {fileID: 103153176}
   - component: {fileID: 103153178}
+  - component: {fileID: 103153179}
   m_Layer: 11
   m_Name: Spikes (15)
   m_TagString: Untagged
@@ -67837,6 +67838,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.58}
   m_EdgeRadius: 0
+--- !u!114 &103153179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103153173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &117596438
 GameObject:
   m_ObjectHideFlags: 0
@@ -69205,6 +69219,7 @@ GameObject:
   - component: {fileID: 163544552}
   - component: {fileID: 163544551}
   - component: {fileID: 163544553}
+  - component: {fileID: 163544554}
   m_Layer: 11
   m_Name: Spikes (37)
   m_TagString: Untagged
@@ -69345,6 +69360,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.77}
   m_EdgeRadius: 0
+--- !u!114 &163544554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163544548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &172385957
 GameObject:
   m_ObjectHideFlags: 0
@@ -69968,6 +69996,7 @@ GameObject:
   - component: {fileID: 184855859}
   - component: {fileID: 184855858}
   - component: {fileID: 184855860}
+  - component: {fileID: 184855861}
   m_Layer: 11
   m_Name: Spikes (32)
   m_TagString: Untagged
@@ -70108,6 +70137,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.69}
   m_EdgeRadius: 0
+--- !u!114 &184855861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184855855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &187477415
 GameObject:
   m_ObjectHideFlags: 0
@@ -70120,6 +70162,7 @@ GameObject:
   - component: {fileID: 187477419}
   - component: {fileID: 187477418}
   - component: {fileID: 187477420}
+  - component: {fileID: 187477421}
   m_Layer: 11
   m_Name: Spikes (51)
   m_TagString: Untagged
@@ -70260,6 +70303,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.77}
   m_EdgeRadius: 0
+--- !u!114 &187477421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187477415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &189227991
 GameObject:
   m_ObjectHideFlags: 0
@@ -70272,6 +70328,7 @@ GameObject:
   - component: {fileID: 189227995}
   - component: {fileID: 189227994}
   - component: {fileID: 189227996}
+  - component: {fileID: 189227997}
   m_Layer: 11
   m_Name: Spikes (7)
   m_TagString: Untagged
@@ -70412,6 +70469,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.67, y: 0.79}
   m_EdgeRadius: 0
+--- !u!114 &189227997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189227991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &202317223
 GameObject:
   m_ObjectHideFlags: 0
@@ -70424,6 +70494,7 @@ GameObject:
   - component: {fileID: 202317227}
   - component: {fileID: 202317226}
   - component: {fileID: 202317228}
+  - component: {fileID: 202317229}
   m_Layer: 11
   m_Name: Spikes (28)
   m_TagString: Untagged
@@ -70564,6 +70635,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &202317229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202317223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &203007488
 GameObject:
   m_ObjectHideFlags: 0
@@ -70576,6 +70660,7 @@ GameObject:
   - component: {fileID: 203007492}
   - component: {fileID: 203007491}
   - component: {fileID: 203007493}
+  - component: {fileID: 203007494}
   m_Layer: 11
   m_Name: Spikes (42)
   m_TagString: Untagged
@@ -70716,6 +70801,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &203007494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203007488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &210246262
 GameObject:
   m_ObjectHideFlags: 0
@@ -71617,6 +71715,7 @@ GameObject:
   - component: {fileID: 265854390}
   - component: {fileID: 265854389}
   - component: {fileID: 265854391}
+  - component: {fileID: 265854392}
   m_Layer: 11
   m_Name: Spikes (46)
   m_TagString: Untagged
@@ -71757,6 +71856,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &265854392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265854386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &266262912
 GameObject:
   m_ObjectHideFlags: 0
@@ -71958,6 +72070,7 @@ GameObject:
   - component: {fileID: 274864472}
   - component: {fileID: 274864471}
   - component: {fileID: 274864473}
+  - component: {fileID: 274864474}
   m_Layer: 11
   m_Name: Spikes (27)
   m_TagString: Untagged
@@ -72098,6 +72211,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &274864474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274864468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &286054901
 GameObject:
   m_ObjectHideFlags: 0
@@ -72674,6 +72800,7 @@ GameObject:
   - component: {fileID: 304525743}
   - component: {fileID: 304525742}
   - component: {fileID: 304525744}
+  - component: {fileID: 304525745}
   m_Layer: 11
   m_Name: Spikes (20)
   m_TagString: Untagged
@@ -72814,6 +72941,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &304525745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304525739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &309552764
 GameObject:
   m_ObjectHideFlags: 0
@@ -73420,6 +73560,7 @@ GameObject:
   - component: {fileID: 366385052}
   - component: {fileID: 366385051}
   - component: {fileID: 366385053}
+  - component: {fileID: 366385054}
   m_Layer: 11
   m_Name: Spikes (5)
   m_TagString: Untagged
@@ -73560,6 +73701,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.64, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &366385054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366385048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &374736743
 GameObject:
   m_ObjectHideFlags: 0
@@ -74235,6 +74389,7 @@ GameObject:
   - component: {fileID: 446791780}
   - component: {fileID: 446791779}
   - component: {fileID: 446791781}
+  - component: {fileID: 446791782}
   m_Layer: 11
   m_Name: Spikes (13)
   m_TagString: Untagged
@@ -74375,6 +74530,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &446791782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446791776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &448055326
 GameObject:
   m_ObjectHideFlags: 0
@@ -74387,6 +74555,7 @@ GameObject:
   - component: {fileID: 448055330}
   - component: {fileID: 448055329}
   - component: {fileID: 448055331}
+  - component: {fileID: 448055332}
   m_Layer: 11
   m_Name: Spikes (26)
   m_TagString: Untagged
@@ -74527,6 +74696,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &448055332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448055326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &457572759
 GameObject:
   m_ObjectHideFlags: 0
@@ -74632,6 +74814,7 @@ GameObject:
   - component: {fileID: 457958303}
   - component: {fileID: 457958302}
   - component: {fileID: 457958304}
+  - component: {fileID: 457958305}
   m_Layer: 11
   m_Name: Spikes (10)
   m_TagString: Untagged
@@ -74772,6 +74955,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.68}
   m_EdgeRadius: 0
+--- !u!114 &457958305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457958299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &461971325
 GameObject:
   m_ObjectHideFlags: 0
@@ -76104,6 +76300,7 @@ GameObject:
   - component: {fileID: 519861941}
   - component: {fileID: 519861940}
   - component: {fileID: 519861942}
+  - component: {fileID: 519861943}
   m_Layer: 11
   m_Name: Spikes (22)
   m_TagString: Untagged
@@ -76244,6 +76441,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &519861943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519861937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &524989818
 GameObject:
   m_ObjectHideFlags: 0
@@ -77213,6 +77423,7 @@ GameObject:
   - component: {fileID: 567307905}
   - component: {fileID: 567307904}
   - component: {fileID: 567307906}
+  - component: {fileID: 567307907}
   m_Layer: 11
   m_Name: Spikes (50)
   m_TagString: Untagged
@@ -77353,6 +77564,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &567307907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567307901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &588184769
 GameObject:
   m_ObjectHideFlags: 0
@@ -78244,6 +78468,7 @@ GameObject:
   - component: {fileID: 643999018}
   - component: {fileID: 643999017}
   - component: {fileID: 643999019}
+  - component: {fileID: 643999020}
   m_Layer: 11
   m_Name: Spikes (40)
   m_TagString: Untagged
@@ -78384,6 +78609,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &643999020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643999014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &670880225
 GameObject:
   m_ObjectHideFlags: 0
@@ -78396,6 +78634,7 @@ GameObject:
   - component: {fileID: 670880229}
   - component: {fileID: 670880228}
   - component: {fileID: 670880230}
+  - component: {fileID: 670880231}
   m_Layer: 11
   m_Name: Spikes (38)
   m_TagString: Untagged
@@ -78536,6 +78775,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.77}
   m_EdgeRadius: 0
+--- !u!114 &670880231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670880225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &675153316
 GameObject:
   m_ObjectHideFlags: 0
@@ -78591,6 +78843,7 @@ GameObject:
   - component: {fileID: 686176891}
   - component: {fileID: 686176890}
   - component: {fileID: 686176892}
+  - component: {fileID: 686176893}
   m_Layer: 11
   m_Name: Spikes
   m_TagString: Untagged
@@ -78731,6 +78984,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &686176893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686176887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &694199202
 GameObject:
   m_ObjectHideFlags: 0
@@ -78833,6 +79099,7 @@ GameObject:
   - component: {fileID: 700244255}
   - component: {fileID: 700244254}
   - component: {fileID: 700244256}
+  - component: {fileID: 700244257}
   m_Layer: 11
   m_Name: Spikes (53)
   m_TagString: Untagged
@@ -78973,6 +79240,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &700244257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700244251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &716925135
 GameObject:
   m_ObjectHideFlags: 0
@@ -79696,6 +79976,7 @@ GameObject:
   - component: {fileID: 735210073}
   - component: {fileID: 735210072}
   - component: {fileID: 735210074}
+  - component: {fileID: 735210075}
   m_Layer: 11
   m_Name: Spikes (39)
   m_TagString: Untagged
@@ -79836,6 +80117,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.89}
   m_EdgeRadius: 0
+--- !u!114 &735210075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735210069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &747717168
 GameObject:
   m_ObjectHideFlags: 0
@@ -80418,6 +80712,7 @@ GameObject:
   - component: {fileID: 769240566}
   - component: {fileID: 769240565}
   - component: {fileID: 769240567}
+  - component: {fileID: 769240568}
   m_Layer: 11
   m_Name: Spikes (47)
   m_TagString: Untagged
@@ -80558,6 +80853,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &769240568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769240562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &770348945
 GameObject:
   m_ObjectHideFlags: 0
@@ -80986,6 +81294,7 @@ GameObject:
   - component: {fileID: 787378125}
   - component: {fileID: 787378124}
   - component: {fileID: 787378126}
+  - component: {fileID: 787378127}
   m_Layer: 11
   m_Name: Spikes (19)
   m_TagString: Untagged
@@ -81126,6 +81435,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &787378127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787378121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &797300727
 GameObject:
   m_ObjectHideFlags: 0
@@ -81231,6 +81553,7 @@ GameObject:
   - component: {fileID: 817407998}
   - component: {fileID: 817407997}
   - component: {fileID: 817407999}
+  - component: {fileID: 817408000}
   m_Layer: 11
   m_Name: Spikes (4)
   m_TagString: Untagged
@@ -81371,6 +81694,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.64, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &817408000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817407994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &818809018
 GameObject:
   m_ObjectHideFlags: 0
@@ -81473,6 +81809,7 @@ GameObject:
   - component: {fileID: 822554184}
   - component: {fileID: 822554183}
   - component: {fileID: 822554185}
+  - component: {fileID: 822554186}
   m_Layer: 11
   m_Name: Spikes (36)
   m_TagString: Untagged
@@ -81613,6 +81950,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &822554186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822554180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &858567941
 GameObject:
   m_ObjectHideFlags: 0
@@ -81762,6 +82112,7 @@ GameObject:
   - component: {fileID: 867888176}
   - component: {fileID: 867888175}
   - component: {fileID: 867888177}
+  - component: {fileID: 867888178}
   m_Layer: 11
   m_Name: Spikes (34)
   m_TagString: Untagged
@@ -81902,6 +82253,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.04}
   m_EdgeRadius: 0
+--- !u!114 &867888178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867888172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &885307260
 GameObject:
   m_ObjectHideFlags: 0
@@ -82130,6 +82494,7 @@ GameObject:
   - component: {fileID: 886271403}
   - component: {fileID: 886271402}
   - component: {fileID: 886271404}
+  - component: {fileID: 886271405}
   m_Layer: 11
   m_Name: Spikes (29)
   m_TagString: Untagged
@@ -82270,6 +82635,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &886271405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886271399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &887353931
 GameObject:
   m_ObjectHideFlags: 0
@@ -83173,6 +83551,7 @@ GameObject:
   - component: {fileID: 932488437}
   - component: {fileID: 932488436}
   - component: {fileID: 932488438}
+  - component: {fileID: 932488439}
   m_Layer: 11
   m_Name: Spikes (9)
   m_TagString: Untagged
@@ -83313,6 +83692,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.68}
   m_EdgeRadius: 0
+--- !u!114 &932488439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932488433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &955785734
 GameObject:
   m_ObjectHideFlags: 0
@@ -85147,6 +85539,7 @@ GameObject:
   - component: {fileID: 1064558766}
   - component: {fileID: 1064558765}
   - component: {fileID: 1064558767}
+  - component: {fileID: 1064558768}
   m_Layer: 11
   m_Name: Spikes (33)
   m_TagString: Untagged
@@ -85287,6 +85680,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.69}
   m_EdgeRadius: 0
+--- !u!114 &1064558768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064558762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1065854939
 GameObject:
   m_ObjectHideFlags: 0
@@ -86388,6 +86794,7 @@ GameObject:
   - component: {fileID: 1115765288}
   - component: {fileID: 1115765287}
   - component: {fileID: 1115765289}
+  - component: {fileID: 1115765290}
   m_Layer: 11
   m_Name: Spikes (23)
   m_TagString: Untagged
@@ -86528,6 +86935,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1115765290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115765284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1121731301
 GameObject:
   m_ObjectHideFlags: 0
@@ -87367,6 +87787,7 @@ GameObject:
   - component: {fileID: 1189335735}
   - component: {fileID: 1189335734}
   - component: {fileID: 1189335736}
+  - component: {fileID: 1189335737}
   m_Layer: 11
   m_Name: Spikes (12)
   m_TagString: Untagged
@@ -87507,6 +87928,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &1189335737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189335731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1195349025
 GameObject:
   m_ObjectHideFlags: 0
@@ -87611,6 +88045,7 @@ GameObject:
   - component: {fileID: 1206361920}
   - component: {fileID: 1206361919}
   - component: {fileID: 1206361921}
+  - component: {fileID: 1206361922}
   m_Layer: 11
   m_Name: Spikes (41)
   m_TagString: Untagged
@@ -87751,6 +88186,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1206361922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206361916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1218202787
 GameObject:
   m_ObjectHideFlags: 0
@@ -87993,6 +88441,7 @@ GameObject:
   - component: {fileID: 1230179581}
   - component: {fileID: 1230179580}
   - component: {fileID: 1230179582}
+  - component: {fileID: 1230179583}
   m_Layer: 11
   m_Name: Spikes (35)
   m_TagString: Untagged
@@ -88133,6 +88582,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.04}
   m_EdgeRadius: 0
+--- !u!114 &1230179583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230179577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1243575229
 GameObject:
   m_ObjectHideFlags: 0
@@ -88276,6 +88738,7 @@ GameObject:
   - component: {fileID: 1256902219}
   - component: {fileID: 1256902218}
   - component: {fileID: 1256902220}
+  - component: {fileID: 1256902221}
   m_Layer: 11
   m_Name: Spikes (18)
   m_TagString: Untagged
@@ -88416,6 +88879,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.98}
   m_EdgeRadius: 0
+--- !u!114 &1256902221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256902215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1264918726
 GameObject:
   m_ObjectHideFlags: 0
@@ -88428,6 +88904,7 @@ GameObject:
   - component: {fileID: 1264918730}
   - component: {fileID: 1264918729}
   - component: {fileID: 1264918731}
+  - component: {fileID: 1264918732}
   m_Layer: 11
   m_Name: Spikes (52)
   m_TagString: Untagged
@@ -88568,6 +89045,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.77}
   m_EdgeRadius: 0
+--- !u!114 &1264918732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264918726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1282758561
 GameObject:
   m_ObjectHideFlags: 0
@@ -89135,6 +89625,7 @@ GameObject:
   - component: {fileID: 1326641137}
   - component: {fileID: 1326641136}
   - component: {fileID: 1326641138}
+  - component: {fileID: 1326641139}
   m_Layer: 11
   m_Name: Spikes (14)
   m_TagString: Untagged
@@ -89275,6 +89766,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &1326641139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326641133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1339409952
 GameObject:
   m_ObjectHideFlags: 0
@@ -89287,6 +89791,7 @@ GameObject:
   - component: {fileID: 1339409956}
   - component: {fileID: 1339409955}
   - component: {fileID: 1339409957}
+  - component: {fileID: 1339409958}
   m_Layer: 11
   m_Name: Spikes (45)
   m_TagString: Untagged
@@ -89427,6 +89932,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1339409958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339409952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1340547318
 GameObject:
   m_ObjectHideFlags: 0
@@ -91902,6 +92420,7 @@ GameObject:
   - component: {fileID: 1408395266}
   - component: {fileID: 1408395265}
   - component: {fileID: 1408395267}
+  - component: {fileID: 1408395268}
   m_Layer: 11
   m_Name: Spikes (49)
   m_TagString: Untagged
@@ -92042,6 +92561,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1408395268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408395262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1411104540
 GameObject:
   m_ObjectHideFlags: 0
@@ -94538,6 +95070,7 @@ GameObject:
   - component: {fileID: 1505620134}
   - component: {fileID: 1505620133}
   - component: {fileID: 1505620135}
+  - component: {fileID: 1505620136}
   m_Layer: 11
   m_Name: Spikes (24)
   m_TagString: Untagged
@@ -94678,6 +95211,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1505620136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505620130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1508273809
 GameObject:
   m_ObjectHideFlags: 0
@@ -95010,6 +95556,7 @@ GameObject:
   - component: {fileID: 1527715534}
   - component: {fileID: 1527715533}
   - component: {fileID: 1527715535}
+  - component: {fileID: 1527715536}
   m_Layer: 11
   m_Name: Spikes (48)
   m_TagString: Untagged
@@ -95150,6 +95697,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1527715536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527715530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1532664010
 GameObject:
   m_ObjectHideFlags: 0
@@ -95389,6 +95949,7 @@ GameObject:
   - component: {fileID: 1533559450}
   - component: {fileID: 1533559449}
   - component: {fileID: 1533559451}
+  - component: {fileID: 1533559452}
   m_Layer: 11
   m_Name: Spikes (16)
   m_TagString: Untagged
@@ -95529,6 +96090,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.69}
   m_EdgeRadius: 0
+--- !u!114 &1533559452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533559446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1543129375
 GameObject:
   m_ObjectHideFlags: 0
@@ -96287,6 +96861,7 @@ GameObject:
   - component: {fileID: 1568072805}
   - component: {fileID: 1568072804}
   - component: {fileID: 1568072806}
+  - component: {fileID: 1568072807}
   m_Layer: 11
   m_Name: Spikes (2)
   m_TagString: Untagged
@@ -96427,6 +97002,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.64, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &1568072807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568072801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1575241695
 GameObject:
   m_ObjectHideFlags: 0
@@ -97159,6 +97747,7 @@ GameObject:
   - component: {fileID: 1625475165}
   - component: {fileID: 1625475164}
   - component: {fileID: 1625475166}
+  - component: {fileID: 1625475167}
   m_Layer: 11
   m_Name: Spikes (43)
   m_TagString: Untagged
@@ -97299,6 +97888,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.73}
   m_EdgeRadius: 0
+--- !u!114 &1625475167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625475161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1638712360
 GameObject:
   m_ObjectHideFlags: 0
@@ -97311,6 +97913,7 @@ GameObject:
   - component: {fileID: 1638712364}
   - component: {fileID: 1638712363}
   - component: {fileID: 1638712365}
+  - component: {fileID: 1638712366}
   m_Layer: 11
   m_Name: Spikes (55)
   m_TagString: Untagged
@@ -97451,6 +98054,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1638712366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638712360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1648306837
 GameObject:
   m_ObjectHideFlags: 0
@@ -98709,6 +99325,7 @@ GameObject:
   - component: {fileID: 1679939921}
   - component: {fileID: 1679939920}
   - component: {fileID: 1679939922}
+  - component: {fileID: 1679939923}
   m_Layer: 11
   m_Name: Spikes (11)
   m_TagString: Untagged
@@ -98849,6 +99466,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.68}
   m_EdgeRadius: 0
+--- !u!114 &1679939923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679939917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1689248232
 GameObject:
   m_ObjectHideFlags: 0
@@ -99280,6 +99910,7 @@ GameObject:
   - component: {fileID: 1701323189}
   - component: {fileID: 1701323188}
   - component: {fileID: 1701323190}
+  - component: {fileID: 1701323191}
   m_Layer: 11
   m_Name: Spikes (3)
   m_TagString: Untagged
@@ -99420,6 +100051,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.64, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &1701323191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701323185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1704241346
 GameObject:
   m_ObjectHideFlags: 0
@@ -100442,6 +101086,7 @@ GameObject:
   - component: {fileID: 1736469515}
   - component: {fileID: 1736469514}
   - component: {fileID: 1736469516}
+  - component: {fileID: 1736469517}
   m_Layer: 11
   m_Name: Spikes (25)
   m_TagString: Untagged
@@ -100582,6 +101227,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1736469517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736469511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1736601185
 GameObject:
   m_ObjectHideFlags: 0
@@ -101201,6 +101859,7 @@ GameObject:
   - component: {fileID: 1759845780}
   - component: {fileID: 1759845779}
   - component: {fileID: 1759845781}
+  - component: {fileID: 1759845782}
   m_Layer: 11
   m_Name: Spikes (30)
   m_TagString: Untagged
@@ -101341,6 +102000,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1759845782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759845776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1760779644
 GameObject:
   m_ObjectHideFlags: 0
@@ -101353,6 +102025,7 @@ GameObject:
   - component: {fileID: 1760779648}
   - component: {fileID: 1760779647}
   - component: {fileID: 1760779649}
+  - component: {fileID: 1760779650}
   m_Layer: 11
   m_Name: Spikes (1)
   m_TagString: Untagged
@@ -101493,6 +102166,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1760779650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760779644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1766550676
 GameObject:
   m_ObjectHideFlags: 0
@@ -102370,6 +103056,7 @@ GameObject:
   - component: {fileID: 1825513562}
   - component: {fileID: 1825513561}
   - component: {fileID: 1825513563}
+  - component: {fileID: 1825513564}
   m_Layer: 11
   m_Name: Spikes (44)
   m_TagString: Untagged
@@ -102510,6 +103197,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1825513564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825513558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1833618411
 GameObject:
   m_ObjectHideFlags: 0
@@ -102752,6 +103452,7 @@ GameObject:
   - component: {fileID: 1848653605}
   - component: {fileID: 1848653604}
   - component: {fileID: 1848653606}
+  - component: {fileID: 1848653607}
   m_Layer: 11
   m_Name: Spikes (8)
   m_TagString: Untagged
@@ -102892,6 +103593,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.68}
   m_EdgeRadius: 0
+--- !u!114 &1848653607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848653601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1852212557
 GameObject:
   m_ObjectHideFlags: 0
@@ -103970,6 +104684,7 @@ GameObject:
   - component: {fileID: 1931064154}
   - component: {fileID: 1931064153}
   - component: {fileID: 1931064155}
+  - component: {fileID: 1931064156}
   m_Layer: 11
   m_Name: Spikes (21)
   m_TagString: Untagged
@@ -104110,6 +104825,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1931064156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931064150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1934666272
 GameObject:
   m_ObjectHideFlags: 0
@@ -104743,6 +105471,7 @@ GameObject:
   - component: {fileID: 1962144644}
   - component: {fileID: 1962144643}
   - component: {fileID: 1962144645}
+  - component: {fileID: 1962144646}
   m_Layer: 11
   m_Name: Spikes (31)
   m_TagString: Untagged
@@ -104883,6 +105612,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1962144646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962144640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &1972546153
 GameObject:
   m_ObjectHideFlags: 0
@@ -105026,6 +105768,7 @@ GameObject:
   - component: {fileID: 2086936412}
   - component: {fileID: 2086936411}
   - component: {fileID: 2086936413}
+  - component: {fileID: 2086936414}
   m_Layer: 11
   m_Name: Spikes (17)
   m_TagString: Untagged
@@ -105166,6 +105909,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 0.72}
   m_EdgeRadius: 0
+--- !u!114 &2086936414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086936408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &2087058038
 GameObject:
   m_ObjectHideFlags: 0
@@ -105178,6 +105934,7 @@ GameObject:
   - component: {fileID: 2087058042}
   - component: {fileID: 2087058041}
   - component: {fileID: 2087058043}
+  - component: {fileID: 2087058044}
   m_Layer: 11
   m_Name: Spikes (54)
   m_TagString: Untagged
@@ -105318,6 +106075,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &2087058044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087058038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4421fb905e8481f937fe3405608ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Roach.Assets.Scripts.Hazards.Spike
+  damage: 1
 --- !u!1 &2106076417
 GameObject:
   m_ObjectHideFlags: 0
