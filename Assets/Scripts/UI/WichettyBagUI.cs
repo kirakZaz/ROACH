@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Roach.Assets.Scripts.Core;
 
 public class WichettyBagUI : MonoBehaviour
 {
@@ -21,13 +22,15 @@ public class WichettyBagUI : MonoBehaviour
 
     private readonly Dictionary<WichettyItem, int> counts = new();
     private readonly Dictionary<WichettyItem, WichettyBagUIRow> rows = new();
+    private WichettyItem lastAddedItem;
+    private float lastAddTime;
 
     private void Awake()
     {
         Instance = this;
 
         if (panel != null)
-            panel.SetActive(true);
+            panel.SetActive(false);
         if (bagButton != null)
             bagButton.onClick.AddListener(TogglePanel);
     }
@@ -57,20 +60,22 @@ public class WichettyBagUI : MonoBehaviour
             $"[BagUI] Adding {amount}x {item.DisplayName}. Current count: {(counts.ContainsKey(item) ? counts[item] : 0)}"
         );
 
-    
         if (!counts.ContainsKey(item))
             counts[item] = 0;
 
         counts[item] += amount;
+
+        // Notify GameManager automatically
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.CollectResource();
+        }
 
         Debug.Log($"[BagUI] New total count: {counts[item]}x {item.DisplayName}");
 
         if (panel != null && panel.activeSelf)
             CreateOrUpdateRow(item, counts[item]);
     }
-
-    private WichettyItem lastAddedItem;
-    private float lastAddTime;
 
     public void Remove(WichettyItem item, int amount)
     {
@@ -88,7 +93,7 @@ public class WichettyBagUI : MonoBehaviour
         }
 
         counts[item] -= amount;
-     if (counts[item] <= 0)
+        if (counts[item] <= 0)
         {
             counts.Remove(item);
 
@@ -143,4 +148,15 @@ public class WichettyBagUI : MonoBehaviour
     {
         return counts.ContainsKey(item) && counts[item] >= amount;
     }
+
+    // NEW METHOD - Get total count of all items
+public int GetTotalItemCount()
+{
+    int total = 0;
+    foreach (var count in counts.Values)
+    {
+        total += count;
+    }
+    return total;
+}
 }

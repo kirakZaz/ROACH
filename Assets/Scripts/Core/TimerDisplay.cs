@@ -38,7 +38,7 @@ namespace Roach.Assets.Scripts.Core
         {
             int minutes = Mathf.FloorToInt(timeRemaining / 60);
             int seconds = Mathf.FloorToInt(timeRemaining % 60);
-            
+
             if (timerText != null)
             {
                 timerText.text = $"{minutes:00}:{seconds:00}";

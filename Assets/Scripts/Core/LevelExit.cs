@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace Roach.Assets.Scripts.Core
 {
@@ -7,13 +7,26 @@ namespace Roach.Assets.Scripts.Core
     public class LevelExit : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private string playerTag = "Player";
-        [SerializeField] private KeyCode interactKey = KeyCode.E;
-        
+        [SerializeField]
+        private string playerTag = "Player";
+
+        [SerializeField]
+        private KeyCode interactKey = KeyCode.T;
+
         [Header("UI")]
-        [SerializeField] private GameObject promptUI;
-        [SerializeField] private TextMeshProUGUI promptText;
-        
+        [SerializeField]
+        private GameObject promptUI;
+
+        [SerializeField]
+        private TextMeshProUGUI promptText;
+
+        [Header("Messages")]
+        [SerializeField]
+        private string canFinishMessage = "Press T to finish level";
+
+        [SerializeField]
+        private string needResourcesMessage = "Collect {0} more resources!";
+
         private bool playerNearby = false;
 
         private void Awake()
@@ -21,7 +34,10 @@ namespace Roach.Assets.Scripts.Core
             var col = GetComponent<Collider2D>();
             if (col)
                 col.isTrigger = true;
-                
+        }
+
+        private void Start()
+        {
             // Hide prompt at start
             if (promptUI)
                 promptUI.SetActive(false);
@@ -32,8 +48,11 @@ namespace Roach.Assets.Scripts.Core
             if (!playerNearby || GameManager.Instance == null)
                 return;
 
-            // Check for interaction
-            if (Input.GetKeyDown(interactKey))
+            // Update prompt message
+            UpdatePromptMessage();
+
+            // Check for interaction only if player can finish
+            if (Input.GetKeyDown(interactKey) && GameManager.Instance.CanFinishLevel)
             {
                 FinishLevel();
             }
@@ -63,10 +82,31 @@ namespace Roach.Assets.Scripts.Core
             {
                 promptUI.SetActive(true);
             }
-            
-            if (promptText)
+
+            UpdatePromptMessage();
+        }
+
+        private void UpdatePromptMessage()
+        {
+            if (promptText == null || GameManager.Instance == null)
+                return;
+
+            if (GameManager.Instance.CanFinishLevel)
             {
-                promptText.text = $"Press {interactKey} to finish level";
+                promptText.text = canFinishMessage;
+                promptText.color = Color.green;
+            }
+            else
+            {
+                int totalCollected = 0;
+                if (WichettyBagUI.Instance != null)
+                {
+                    totalCollected = WichettyBagUI.Instance.GetTotalItemCount();
+                }
+
+                int needed = GameManager.Instance.RequiredResources - totalCollected;
+                promptText.text = string.Format(needResourcesMessage, needed);
+                promptText.color = Color.yellow;
             }
         }
 
@@ -81,7 +121,7 @@ namespace Roach.Assets.Scripts.Core
         private void FinishLevel()
         {
             HidePrompt();
-            
+
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.LevelComplete();

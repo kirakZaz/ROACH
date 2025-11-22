@@ -1,30 +1,48 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace Roach.Assets.Scripts.Core
 {
     public class StartScreenUI : MonoBehaviour
     {
         [Header("Panels")]
-        [SerializeField] private GameObject startPanel;
-        [SerializeField] private GameObject gamePanel;
-        [SerializeField] private GameObject gameOverPanel;
-        [SerializeField] private GameObject winPanel;
+        [SerializeField]
+        private GameObject startPanel;
+
+        [SerializeField]
+        private GameObject gamePanel;
+
+        [SerializeField]
+        private GameObject gameOverPanel;
+
+        [SerializeField]
+        private GameObject winPanel;
 
         [Header("Start Panel")]
-        [SerializeField] private Button playButton;
-        [SerializeField] private TextMeshProUGUI playButtonText;
+        [SerializeField]
+        private Button playButton;
+
+        [SerializeField]
+        private TextMeshProUGUI playButtonText;
 
         [Header("Game Panel")]
-        [SerializeField] private TextMeshProUGUI timerText;
-        [SerializeField] private Button pauseButton;
+        [SerializeField]
+        private TextMeshProUGUI timerText;
+
+        [SerializeField]
+        private TextMeshProUGUI resourceText;
+
+        [SerializeField]
+        private Button pauseButton;
 
         [Header("Game Over Panel")]
-        [SerializeField] private Button playAgainButton;
+        [SerializeField]
+        private Button playAgainButton;
 
         [Header("Win Panel")]
-        [SerializeField] private Button restartButton;
+        [SerializeField]
+        private Button restartButton;
 
         private void Start()
         {
@@ -45,11 +63,12 @@ namespace Roach.Assets.Scripts.Core
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnTimeChanged += UpdateTimerUI;
+                GameManager.Instance.OnResourcesChanged += UpdateResourceUI;
                 GameManager.Instance.OnGameOver += ShowGameOverPanel;
                 GameManager.Instance.OnLevelComplete += ShowWinPanel;
             }
 
-            // Show start panel
+            // Show start panel at the beginning
             ShowStartPanel();
         }
 
@@ -71,20 +90,28 @@ namespace Roach.Assets.Scripts.Core
 
         private void ShowGameOverPanel()
         {
+            Debug.Log("ShowGameOverPanel called!");
             SetActivePanel(gameOverPanel);
         }
 
         private void ShowWinPanel()
         {
+            Debug.Log("ShowWinPanel called!");
             SetActivePanel(winPanel);
         }
 
         private void SetActivePanel(GameObject panel)
         {
-            if (startPanel) startPanel.SetActive(panel == startPanel);
-            if (gamePanel) gamePanel.SetActive(panel == gamePanel);
-            if (gameOverPanel) gameOverPanel.SetActive(panel == gameOverPanel);
-            if (winPanel) winPanel.SetActive(panel == winPanel);
+            if (startPanel)
+                startPanel.SetActive(panel == startPanel);
+            if (gamePanel)
+                gamePanel.SetActive(panel == gamePanel);
+            if (gameOverPanel)
+                gameOverPanel.SetActive(panel == gameOverPanel);
+            if (winPanel)
+                winPanel.SetActive(panel == winPanel);
+
+            Debug.Log($"Active panel: {panel?.name ?? "none"}");
         }
 
         private void OnPlayClicked()
@@ -101,7 +128,7 @@ namespace Roach.Assets.Scripts.Core
                 }
             }
 
-            ShowGamePanel();
+            ShowGamePanel(); // Hide start panel, show game panel
         }
 
         private void OnPauseClicked()
@@ -111,7 +138,7 @@ namespace Roach.Assets.Scripts.Core
                 GameManager.Instance.PauseGame();
             }
 
-            ShowStartPanel();
+            ShowStartPanel(); // Hide game panel, show start panel
         }
 
         private void OnPlayAgainClicked()
@@ -124,7 +151,8 @@ namespace Roach.Assets.Scripts.Core
 
         private void UpdateTimerUI(float timeRemaining)
         {
-            if (timerText == null) return;
+            if (timerText == null)
+                return;
 
             int minutes = Mathf.FloorToInt(timeRemaining / 60f);
             int seconds = Mathf.FloorToInt(timeRemaining % 60f);
@@ -139,12 +167,34 @@ namespace Roach.Assets.Scripts.Core
                 timerText.color = Color.white;
         }
 
+        private void UpdateResourceUI(int current, int required)
+        {
+            if (resourceText == null)
+                return;
+
+            // Get actual count from WichettyBagUI if available
+            int actualCount = current;
+            if (WichettyBagUI.Instance != null)
+            {
+                actualCount = WichettyBagUI.Instance.GetTotalItemCount();
+            }
+
+            resourceText.text = $"Resources: {actualCount}/{required}";
+
+            // Color change when goal is reached
+            if (actualCount >= required)
+                resourceText.color = Color.green;
+            else
+                resourceText.color = Color.white;
+        }
+
         private void OnDestroy()
         {
             // Unsubscribe from events
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnTimeChanged -= UpdateTimerUI;
+                GameManager.Instance.OnResourcesChanged -= UpdateResourceUI;
                 GameManager.Instance.OnGameOver -= ShowGameOverPanel;
                 GameManager.Instance.OnLevelComplete -= ShowWinPanel;
             }

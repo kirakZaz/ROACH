@@ -1,90 +1,56 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Roach.Assets.Scripts.Core;
 
 public class LivesUI : MonoBehaviour
 {
+    [Header("UI Elements")]
     [SerializeField]
-    private PlayerLives playerLives; // drag your Player here
+    private Image[] lifeImages;
+
+    [Header("Sprites")]
+    [SerializeField]
+    private Sprite fullHeart;
 
     [SerializeField]
-    private Image[] heartImages; // Heart1..Heart3
+    private Sprite emptyHeart;
 
-    [SerializeField]
-    private int heartSize = 64; // pixels
+    private PlayerLives playerLives;
 
-    [SerializeField]
-    private int aaSamples = 4; // 1..5 (edge smoothness)
-
-    [SerializeField]
-    private int heartPixelSize = 8; // 6..16 — подгони под размер UI
-
-    [SerializeField]
-    private int heartPPU = 64;
-
-    private void Awake()
+    private void Start()
     {
-        var heartSprite = HeartSpriteGenerator.CreatePixelHeartSprite(heartPixelSize, heartPPU);
-        for (int i = 0; i < heartImages.Length; i++)
+        // Find PlayerLives component
+        playerLives = FindObjectOfType<PlayerLives>();
+
+        if (playerLives != null)
         {
-            if (!heartImages[i])
-                continue;
-            if (!heartImages[i].sprite)
-            {
-                heartImages[i].sprite = heartSprite;
-                heartImages[i].preserveAspect = true;
-            }
-            heartImages[i].color = Color.red; // full heart
+            playerLives.OnLivesChanged += UpdateLivesDisplay;
+            UpdateLivesDisplay(playerLives.CurrentLives);
+        }
+        else
+        {
+            Debug.LogError("PlayerLives not found in scene!");
         }
     }
 
-    private void OnEnable()
+    private void UpdateLivesDisplay(int currentLives)
     {
-        if (!playerLives)
-        {
-            Debug.LogError("LivesUI: PlayerLives is not assigned.", this);
+        if (lifeImages == null)
             return;
-        }
 
-        playerLives.OnLivesChanged += UpdateHearts;
-        UpdateHearts(playerLives.CurrentLives); // sync immediately
-    }
-
-    private void OnDisable()
-    {
-        if (playerLives)
-            playerLives.OnLivesChanged -= UpdateHearts;
-    }
-
-    private void UpdateHearts(int current)
-    {
-        for (int i = 0; i < heartImages.Length; i++)
+        for (int i = 0; i < lifeImages.Length; i++)
         {
-            if (!heartImages[i])
-                continue;
-            bool on = i < current;
-
-            // keep the red tint for full hearts, fade out for empty
-            heartImages[i].color = on ? Color.red : new Color(1f, 1f, 1f, 0.25f);
+            if (lifeImages[i] != null)
+            {
+                lifeImages[i].sprite = (i < currentLives) ? fullHeart : emptyHeart;
+            }
         }
     }
-    public void LoseLife(int amount = 1)
-{
-    if (CurrentLives <= 0)
-        return;
 
-    CurrentLives = Mathf.Max(0, CurrentLives - amount);
-    OnLivesChanged?.Invoke(CurrentLives);
-
-    if (CurrentLives == 0)
+    private void OnDestroy()
     {
-        OnGameOver?.Invoke();
-        
-        // Trigger GameManager Game Over
-        if (GameManager.Instance != null)
+        if (playerLives != null)
         {
-            GameManager.Instance.GameOver();
+            playerLives.OnLivesChanged -= UpdateLivesDisplay;
         }
     }
-}
 }

@@ -9,21 +9,44 @@ namespace Roach.Assets.Scripts.Core
         public static GameManager Instance { get; private set; }
 
         [Header("Game Settings")]
-        [SerializeField] private float gameDuration = 300f; // 5 minutes in seconds
+        [SerializeField]
+        private float gameDuration = 300f; // 5 minutes in seconds
+
+        [SerializeField]
+        private int requiredResources = 10;
 
         private float timeRemaining;
+        private int collectedResources = 0;
         private bool gameStarted = false;
         private bool gamePaused = false;
         private bool gameEnded = false;
 
         // Events for UI
         public event Action<float> OnTimeChanged;
+        public event Action<int, int> OnResourcesChanged; // current, required
         public event Action OnGameOver;
         public event Action OnLevelComplete;
 
         public bool GameStarted => gameStarted;
         public bool GamePaused => gamePaused;
         public float TimeRemaining => timeRemaining;
+        public int CollectedResources => collectedResources;
+        public int RequiredResources => requiredResources;
+
+        public bool CanFinishLevel
+        {
+            get
+            {
+                // Automatically get total from WichettyBagUI
+                if (WichettyBagUI.Instance != null)
+                {
+                    return WichettyBagUI.Instance.GetTotalItemCount() >= requiredResources;
+                }
+
+                // Fallback to simple counter
+                return collectedResources >= requiredResources;
+            }
+        }
 
         private void Awake()
         {
@@ -70,7 +93,18 @@ namespace Roach.Assets.Scripts.Core
             gameEnded = false;
             Time.timeScale = 1f;
             OnTimeChanged?.Invoke(timeRemaining);
+            OnResourcesChanged?.Invoke(collectedResources, requiredResources);
             Debug.Log("Game Started!");
+        }
+
+        public void CollectResource()
+        {
+            if (!gameStarted || gameEnded)
+                return;
+
+            collectedResources++;
+            OnResourcesChanged?.Invoke(collectedResources, requiredResources);
+            Debug.Log($"Collected! {collectedResources}/{requiredResources}");
         }
 
         public void PauseGame()
@@ -89,8 +123,9 @@ namespace Roach.Assets.Scripts.Core
 
         public void GameOver()
         {
-            if (gameEnded) return;
-            
+            if (gameEnded)
+                return;
+
             gameEnded = true;
             Time.timeScale = 0f;
             OnGameOver?.Invoke();
@@ -99,8 +134,9 @@ namespace Roach.Assets.Scripts.Core
 
         public void LevelComplete()
         {
-            if (gameEnded) return;
-            
+            if (gameEnded)
+                return;
+
             gameEnded = true;
             Time.timeScale = 0f;
             OnLevelComplete?.Invoke();
