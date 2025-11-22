@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Roach.Assets.Scripts.Core;
 
 public class LivesUI : MonoBehaviour
 {
@@ -67,4 +68,23 @@ public class LivesUI : MonoBehaviour
             heartImages[i].color = on ? Color.red : new Color(1f, 1f, 1f, 0.25f);
         }
     }
+    public void LoseLife(int amount = 1)
+{
+    if (CurrentLives <= 0)
+        return;
+
+    CurrentLives = Mathf.Max(0, CurrentLives - amount);
+    OnLivesChanged?.Invoke(CurrentLives);
+
+    if (CurrentLives == 0)
+    {
+        OnGameOver?.Invoke();
+        
+        // Trigger GameManager Game Over
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
+}
 }

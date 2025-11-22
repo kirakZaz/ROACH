@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Roach.Assets.Scripts.Core
 {
@@ -13,9 +14,12 @@ namespace Roach.Assets.Scripts.Core
         private float timeRemaining;
         private bool gameStarted = false;
         private bool gamePaused = false;
+        private bool gameEnded = false;
 
         // Events for UI
         public event Action<float> OnTimeChanged;
+        public event Action OnGameOver;
+        public event Action OnLevelComplete;
 
         public bool GameStarted => gameStarted;
         public bool GamePaused => gamePaused;
@@ -45,7 +49,7 @@ namespace Roach.Assets.Scripts.Core
 
         private void Update()
         {
-            if (!gameStarted || gamePaused)
+            if (!gameStarted || gamePaused || gameEnded)
                 return;
 
             // Countdown timer
@@ -55,8 +59,7 @@ namespace Roach.Assets.Scripts.Core
             if (timeRemaining <= 0f)
             {
                 timeRemaining = 0f;
-                // TODO: Game over logic later
-                Debug.Log("Time's up!");
+                GameOver();
             }
         }
 
@@ -64,6 +67,7 @@ namespace Roach.Assets.Scripts.Core
         {
             gameStarted = true;
             gamePaused = false;
+            gameEnded = false;
             Time.timeScale = 1f;
             OnTimeChanged?.Invoke(timeRemaining);
             Debug.Log("Game Started!");
@@ -81,6 +85,32 @@ namespace Roach.Assets.Scripts.Core
             gamePaused = false;
             Time.timeScale = 1f;
             Debug.Log("Game Resumed!");
+        }
+
+        public void GameOver()
+        {
+            if (gameEnded) return;
+            
+            gameEnded = true;
+            Time.timeScale = 0f;
+            OnGameOver?.Invoke();
+            Debug.Log("Game Over!");
+        }
+
+        public void LevelComplete()
+        {
+            if (gameEnded) return;
+            
+            gameEnded = true;
+            Time.timeScale = 0f;
+            OnLevelComplete?.Invoke();
+            Debug.Log("Level Complete!");
+        }
+
+        public void RestartLevel()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
