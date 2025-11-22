@@ -58,6 +58,9 @@ public class PlayerController2D : MonoBehaviour
     public float footstepInterval = 0.35f; // how often to play when moving
     private float footstepTimer;
 
+    [Header("Enemy Stomp")]
+    public PlayerStomp playerStomp; // Reference to the stomp component
+
     [Header("Audio (Stomp Only)")]
     public AudioClip sfxAttack; // Assign Player_Attack(.wav or _Short)
     public float stompBounceForce = 1f; // Upward bounce after a stomp
@@ -89,7 +92,7 @@ public class PlayerController2D : MonoBehaviour
     // state
     private bool wasGrounded;
 
-    // static cache so we don’t duplicate background on reloads
+    // static cache so we don't duplicate background on reloads
     private static AudioSource bgSource;
 
     private void Awake()
@@ -227,8 +230,9 @@ public class PlayerController2D : MonoBehaviour
             groundLayer
         );
 
-        // Jump
-        if (jumpPressed && isGrounded && !isCrouching)
+        // Jump - allow jumping on ground OR on enemy
+        bool canJump = isGrounded || (playerStomp != null && playerStomp.IsStandingOnEnemy());
+        if (jumpPressed && canJump && !isCrouching)
         {
             Vector2 v = rb.linearVelocity;
             v.y = 0f;

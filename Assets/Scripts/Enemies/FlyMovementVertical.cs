@@ -2,12 +2,17 @@ using UnityEngine;
 
 namespace Roach.Assets.Scripts.Enemies
 {
-    public class VertMovement : MonoBehaviour
+    public class FlyMovementVertical : MonoBehaviour
     {
         [Header("Movement Settings")]
         public float speed = 3f;
         public float flightDistance = 3f;
         
+        [Header("Visual Settings")]
+        public bool flipHorizontalOnTurn = false; // Optional: flip X instead of Y
+        public bool rotateOnTurn = false; // Optional: rotate instead
+        public float upRotation = 0f;
+        public float downRotation = 180f;
 
         private Vector2 startPosition;
         private bool movingUp = true;
@@ -31,12 +36,26 @@ namespace Roach.Assets.Scripts.Enemies
                 ? new Vector2(transform.position.x, startPosition.y + flightDistance)
                 : new Vector2(transform.position.x, startPosition.y - flightDistance);
 
-            transform.position = Vector2.MoveTowards(targetPos, transform.position, step);
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
 
-        
+            if (Vector2.Distance(transform.position, targetPos) < 0.05f)
+            {
+                movingUp = !movingUp;
+
+                // Optional visual changes on turn
+                if (rotateOnTurn)
+                {
+                    float targetRotation = movingUp ? upRotation : downRotation;
+                    transform.rotation = Quaternion.Euler(0, 0, targetRotation);
+                }
+                else if (flipHorizontalOnTurn && spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = !spriteRenderer.flipX;
+                }
+            }
         }
 
-        void OnDrawingGizmosSelected()
+        void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(

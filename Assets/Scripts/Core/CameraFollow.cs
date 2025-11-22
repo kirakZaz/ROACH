@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -26,6 +27,12 @@ public class CameraFollow : MonoBehaviour
     public bool useBackgroundGroupBounds = true;
     public Transform backgroundRoot; // parent that contains all background pieces
 
+    [Header("Layer Filtering")]
+    [Tooltip("Which layers to include when calculating bounds (check Default, Ground, etc.)")]
+    public LayerMask includeLayers = -1; // -1 means "Everything" by default
+    [Tooltip("Always ignore UI layer even if included above")]
+    public bool alwaysIgnoreUI = true;
+
     [Header("Dead Zone")]
     public bool useDeadZone = false;
     public float deadZoneWidth = 2f;
@@ -33,6 +40,10 @@ public class CameraFollow : MonoBehaviour
 
     [Header("Zoom Display")]
     public bool showZoomInfo = true;
+    [Tooltip("Only show zoom info when game has started (not on menu)")]
+    public bool onlyShowDuringGameplay = true;
+    [Tooltip("Set this to true when PLAY button is clicked")]
+    public bool gameStarted = false;
     public float currentZoom = 5f;
 
     private Camera cam;
@@ -89,6 +100,10 @@ public class CameraFollow : MonoBehaviour
         Bounds total = new Bounds();
         foreach (Renderer r in renderers)
         {
+            // Check if this renderer's layer should be included
+            if (!ShouldIncludeLayer(r.gameObject.layer))
+                continue;
+
             if (first)
             {
                 total = r.bounds;
@@ -105,6 +120,17 @@ public class CameraFollow : MonoBehaviour
         minY = total.min.y;
         maxY = total.max.y;
         hasAutoBounds = true;
+    }
+
+    // Helper method to check if a layer should be included
+    private bool ShouldIncludeLayer(int layer)
+    {
+        // Always ignore UI if that option is enabled
+        if (alwaysIgnoreUI && layer == LayerMask.NameToLayer("UI"))
+            return false;
+
+        // Check if the layer is in our include mask
+        return ((1 << layer) & includeLayers) != 0;
     }
 
     void LateUpdate()
@@ -195,10 +221,15 @@ public class CameraFollow : MonoBehaviour
         float foundMinY = float.MaxValue;
         float foundMaxY = float.MinValue;
 
+        int objectsIncluded = 0;
+
         foreach (GameObject obj in allObjects)
         {
-            if (obj.layer == LayerMask.NameToLayer("UI"))
+            // Skip if this layer shouldn't be included
+            if (!ShouldIncludeLayer(obj.layer))
                 continue;
+
+            // Skip camera objects
             if (obj.GetComponent<Camera>())
                 continue;
 
@@ -211,7 +242,14 @@ public class CameraFollow : MonoBehaviour
                 foundMaxX = Mathf.Max(foundMaxX, bounds.max.x);
                 foundMinY = Mathf.Min(foundMinY, bounds.min.y);
                 foundMaxY = Mathf.Max(foundMaxY, bounds.max.y);
+                objectsIncluded++;
             }
+        }
+
+        if (objectsIncluded == 0)
+        {
+            Debug.LogWarning("CameraFollow: No objects with renderers found in included layers.");
+            return;
         }
 
         float padding = 2f;
@@ -220,7 +258,9 @@ public class CameraFollow : MonoBehaviour
         minY = foundMinY - padding;
         maxY = foundMaxY + padding;
 
-        Debug.Log($"CameraFollow: bounds set to X({minX:F1}..{maxX:F1}) Y({minY:F1}..{maxY:F1})");
+        Debug.Log(
+            $"CameraFollow: bounds set to X({minX:F1}..{maxX:F1}) Y({minY:F1}..{maxY:F1}) from {objectsIncluded} objects"
+        );
     }
 
     void OnDrawGizmosSelected()
@@ -259,6 +299,10 @@ public class CameraFollow : MonoBehaviour
     void OnGUI()
     {
         if (!showZoomInfo || !Application.isPlaying)
+            return;
+
+        // Only show during gameplay if that option is enabled
+        if (onlyShowDuringGameplay && !gameStarted)
             return;
 
         GUIStyle style = new GUIStyle(GUI.skin.label)

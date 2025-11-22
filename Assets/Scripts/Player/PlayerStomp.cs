@@ -22,13 +22,17 @@ public class PlayerStomp : MonoBehaviour
     [SerializeField]
     private float postStompInvuln = 0.25f;
 
+    [SerializeField]
+    private float stompCooldown = 0.1f; // Prevent multiple stomps on same enemy too quickly
+
     [Header("Audio")]
     [SerializeField]
     private bool playStompSfx = true;
-    private AudioSource audioSource; // ← assign Player's AudioSource or leave null to auto-find
+    
+    private AudioSource audioSource;
 
     [SerializeField]
-    private AudioClip sfxAttack; // ← assign Player_Attack.wav
+    private AudioClip sfxAttack;
 
     [SerializeField]
     [Range(0f, 1f)]
@@ -38,7 +42,12 @@ public class PlayerStomp : MonoBehaviour
     private Vector2 pitchRange = new Vector2(0.95f, 1.05f);
 
     [SerializeField]
-    private float cutOffAfterSeconds = 0f; // 0 = don't cut; e.g. 0.25f to truncate a long clip
+    private float cutOffAfterSeconds = 0f;
+
+    // Track what we're currently standing on
+    private bool isStandingOnEnemy = false;
+    private float lastStompTime = -999f;
+    private IStompable currentEnemyUnderfoot = null;
 
     private void Reset()
     {
@@ -46,55 +55,95 @@ public class PlayerStomp : MonoBehaviour
         if (rb)
             playerRb = rb;
 
-        // try to auto-grab a sibling/parent AudioSource (Player)
         var src = GetComponentInParent<AudioSource>();
         if (src)
             audioSource = src;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) => TryHandleStomp(other);
+    private void OnTriggerEnter2D(Collider2D other) => TryHandleStomp(other, true);
 
-    private void OnTriggerStay2D(Collider2D other) => TryHandleStomp(other);
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        // Check if we're standing on an enemy
+        if (playerRb && playerRb.linearVelocity.y > -0.1f && playerRb.linearVelocity.y < 0.1f)
+        {
+            IStompable stompable = other.GetComponentInParent<IStompable>();
+            if (stompable != null)
+            {
+                Transform enemyRoot = (stompable as MonoBehaviour).transform;
+                if (transform.position.y >= enemyRoot.position.y)
+                {
+                    isStandingOnEnemy = true;
+                    currentEnemyUnderfoot = stompable;
+                    return;
+                }
+            }
+        }
+        
+        TryHandleStomp(other, false);
+    }
 
-    private void TryHandleStomp(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // Clear standing status when leaving enemy
+        IStompable stompable = other.GetComponentInParent<IStompable>();
+        if (stompable != null && stompable == currentEnemyUnderfoot)
+        {
+            isStandingOnEnemy = false;
+            currentEnemyUnderfoot = null;
+        }
+    }
+
+    private void TryHandleStomp(Collider2D other, bool isEnter)
     {
         if (!playerRb)
             return;
 
-        // must be moving downward at least this fast
-        if (playerRb.linearVelocity.y > minDownSpeed)
+        // Cooldown to prevent double-stomps
+        if (Time.time - lastStompTime < stompCooldown)
             return;
 
-        // must hit something stompable
+        // Must be moving downward (or just entered)
+        if (!isEnter && playerRb.linearVelocity.y > minDownSpeed)
+            return;
+
+        // Must hit something stompable
         IStompable stompable = other.GetComponentInParent<IStompable>();
         if (stompable == null)
             return;
 
-        // ensure our stomp collider is above enemy root (top hit)
+        // Ensure our stomp collider is above enemy root (top hit)
         Transform enemyRoot = (stompable as MonoBehaviour).transform;
         if (transform.position.y < enemyRoot.position.y)
             return;
 
-        // ---- STOMP CONFIRMED ----
+        // Don't stomp if we're just standing (allow jumping while on enemy)
+        if (!isEnter && isStandingOnEnemy && stompable == currentEnemyUnderfoot)
+        {
+            // Player is standing on enemy, don't auto-stomp, let them jump
+            return;
+        }
 
-        // 1) bounce
+        // ---- STOMP CONFIRMED ----
+        lastStompTime = Time.time;
+
+        // 1) Bounce
         Vector2 v = playerRb.linearVelocity;
         v.y = bounceVelocity;
         playerRb.linearVelocity = v;
 
-        // 2) TEMPORARY invulnerability vs enemy collider
+        // 2) Temporary invulnerability
         if (playerHurtCollider != null)
         {
             Collider2D enemyCol = other;
             StartCoroutine(TempIgnoreCollision(playerHurtCollider, enemyCol, postStompInvuln));
         }
 
-        // 3) PLAY SOUND (this is the spot you asked about)
+        // 3) Play sound
         if (sfxAttack != null)
         {
             if (!audioSource)
             {
-                // last-chance: try to find a source at runtime
                 audioSource = GetComponentInParent<AudioSource>();
             }
 
@@ -108,8 +157,12 @@ public class PlayerStomp : MonoBehaviour
             }
         }
 
-        // 4) notify enemy
+        // 4) Notify enemy
         stompable.TakeStomp(playerRb.gameObject);
+        
+        // Clear standing status since we just stomped
+        isStandingOnEnemy = false;
+        currentEnemyUnderfoot = null;
     }
 
     private IEnumerator TempIgnoreCollision(Collider2D a, Collider2D b, float seconds)
@@ -125,9 +178,14 @@ public class PlayerStomp : MonoBehaviour
 
     private IEnumerator StopClipAfter(AudioSource src, float seconds)
     {
-        // waits then stops the source (cuts off any currently playing one-shot tail)
         yield return new WaitForSeconds(seconds);
         if (src)
             src.Stop();
+    }
+
+    // Public method to check if player can jump (called from PlayerController)
+    public bool IsStandingOnEnemy()
+    {
+        return isStandingOnEnemy;
     }
 }
