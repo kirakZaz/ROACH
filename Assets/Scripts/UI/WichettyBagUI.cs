@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using Roach.Assets.Scripts.Core;
 using UnityEngine;
 using UnityEngine.UI;
-using Roach.Assets.Scripts.Core;
 
 public class WichettyBagUI : MonoBehaviour
 {
@@ -30,7 +30,8 @@ public class WichettyBagUI : MonoBehaviour
         Instance = this;
 
         if (panel != null)
-            panel.SetActive(false);
+            panel.SetActive(true);
+            
         if (bagButton != null)
             bagButton.onClick.AddListener(TogglePanel);
     }
@@ -150,13 +151,13 @@ public class WichettyBagUI : MonoBehaviour
     }
 
     // NEW METHOD - Get total count of all items
-public int GetTotalItemCount()
-{
-    int total = 0;
-    foreach (var count in counts.Values)
+    public int GetTotalItemCount()
     {
-        total += count;
+        int total = 0;
+        foreach (var count in counts.Values)
+        {
+            total += count;
+        }
+        return total;
     }
-    return total;
-}
 }
