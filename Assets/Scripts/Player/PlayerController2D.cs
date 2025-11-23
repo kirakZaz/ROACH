@@ -289,7 +289,12 @@ public class PlayerController2D : MonoBehaviour
         if (onWall)
         {
             rb.gravityScale = 0f;
-            rb.linearVelocity = new Vector2(0f, vertical * climbSpeed);
+
+            // Move player towards the wall while climbing
+            float wallDirection = touchingLeftWall ? -1f : 0.5f;
+            float horizontalSpeed = wallDirection * moveSpeed * 0.3f; // 30% of normal speed
+
+            rb.linearVelocity = new Vector2(horizontalSpeed, vertical * climbSpeed);
         }
         else
         {

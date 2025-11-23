@@ -30,6 +30,7 @@ public class CameraFollow : MonoBehaviour
     [Header("Layer Filtering")]
     [Tooltip("Which layers to include when calculating bounds (check Default, Ground, etc.)")]
     public LayerMask includeLayers = -1; // -1 means "Everything" by default
+
     [Tooltip("Always ignore UI layer even if included above")]
     public bool alwaysIgnoreUI = true;
 
@@ -40,8 +41,10 @@ public class CameraFollow : MonoBehaviour
 
     [Header("Zoom Display")]
     public bool showZoomInfo = true;
+
     [Tooltip("Only show zoom info when game has started (not on menu)")]
     public bool onlyShowDuringGameplay = true;
+
     [Tooltip("Set this to true when PLAY button is clicked")]
     public bool gameStarted = false;
     public float currentZoom = 5f;
@@ -69,6 +72,9 @@ public class CameraFollow : MonoBehaviour
         {
             RecalculateBoundsFromBackgroundGroup();
         }
+
+        // Hide zoom info until game starts
+        gameStarted = false;
     }
 
     void UpdateCameraHalfSize()
@@ -133,6 +139,15 @@ public class CameraFollow : MonoBehaviour
         return ((1 << layer) & includeLayers) != 0;
     }
 
+    void Update()
+    {
+        // Check if game has started via GameManager
+        if (Roach.Assets.Scripts.Core.GameManager.Instance != null)
+        {
+            gameStarted = Roach.Assets.Scripts.Core.GameManager.Instance.GameStarted;
+        }
+    }
+
     void LateUpdate()
     {
         if (!player)
@@ -181,7 +196,7 @@ public class CameraFollow : MonoBehaviour
             float clampMinY = minY + halfHeight;
             float clampMaxY = maxY - halfHeight;
 
-            // if background smaller than camera — keep centered on that axis
+            // if background smaller than camera - keep centered on that axis
             if (clampMinX > clampMaxX)
             {
                 targetPosition.x = (minX + maxX) * 0.5f;
@@ -305,25 +320,27 @@ public class CameraFollow : MonoBehaviour
         if (onlyShowDuringGameplay && !gameStarted)
             return;
 
+        // Larger style for better visibility
         GUIStyle style = new GUIStyle(GUI.skin.label)
         {
-            fontSize = 12,
+            fontSize = 28, // increased from 16
             normal = { textColor = Color.white },
             alignment = TextAnchor.LowerRight,
-            padding = new RectOffset(5, 5, 5, 5),
+            padding = new RectOffset(15, 15, 15, 15), // increased from 5
         };
 
         string zoomText = $"Zoom: {currentZoom:F1}\nQ/E or mouse wheel\nR for reset";
 
         Vector2 textSize = style.CalcSize(new GUIContent(zoomText));
-        float width = textSize.x + 20;
-        float height = textSize.y + 10;
+        float width = textSize.x + 30; // increased from 20
+        float height = textSize.y + 20; // increased from 10
 
-        float xPos = Screen.width - width - 10;
-        float yPos = Screen.height - height - 10;
+        float xPos = Screen.width - width - 15; // increased from 10
+        float yPos = Screen.height - height - 15;
 
+        // Slightly darker background for better contrast
         Color oldColor = GUI.color;
-        GUI.color = new Color(0, 0, 0, 0.6f);
+        GUI.color = new Color(0, 0, 0, 0.7f); // increased from 0.6
         GUI.DrawTexture(new Rect(xPos, yPos, width, height), Texture2D.whiteTexture);
 
         GUI.color = Color.white;
