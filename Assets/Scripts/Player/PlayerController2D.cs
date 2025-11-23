@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController2D : MonoBehaviour
 {
     [Header("Move & Jump")]
     public float moveSpeed = 6f;
     public float jumpForce = 12f;
-    public KeyCode jumpKey = KeyCode.W; // Space also works
+    public KeyCode jumpKey = KeyCode.W;
 
     [Header("Variable Jump Height")]
     public float fallGravityMultiplier = 1.8f;
@@ -39,12 +40,27 @@ public class PlayerController2D : MonoBehaviour
     [Header("Visuals")]
     public bool flipSpriteOnMove = true;
 
+    [Header("Animation")]
+    [SerializeField]
+    private Sprite[] idleSprites;
+    [SerializeField]
+    private float idleAnimSpeed = 0.2f;
+
+    [SerializeField]
+    private Sprite[] walkSprites;
+    [SerializeField]
+    private float walkAnimSpeed = 0.15f;
+
+    [SerializeField]
+    private Sprite[] climbSprites;
+    [SerializeField]
+    private float climbAnimSpeed = 0.2f;
+
     [Header("Level Fail")]
     public float fallThreshold = -10f;
 
-    // ----------------- AUDIO: background + stomp -----------------
     [Header("Background Sound")]
-    public AudioClip sfxBackground; // ← assign Toxic_Crunch.wav here
+    public AudioClip sfxBackground;
 
     [Range(0f, 1f)]
     public float backgroundVolume = 1f;
@@ -55,17 +71,11 @@ public class PlayerController2D : MonoBehaviour
 
     [Range(0f, 1f)]
     public float footstepVolume = 0.6f;
-    public float footstepInterval = 0.35f; // how often to play when moving
+    public float footstepInterval = 0.35f;
     private float footstepTimer;
 
     [Header("Enemy Stomp")]
-    public PlayerStomp playerStomp; // Reference to the stomp component
-
-    [Header("Audio (Stomp Only)")]
-    public AudioClip sfxAttack; // Assign Player_Attack(.wav or _Short)
-    public float stompBounceForce = 1f; // Upward bounce after a stomp
-    public LayerMask enemyLayer; // Set to your enemy layer (optional if using tag)
-    public bool requireDownwardVelocity = true; // Only count stomp if we were falling
+    public PlayerStomp playerStomp;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -80,19 +90,17 @@ public class PlayerController2D : MonoBehaviour
     private float defaultGravity;
     private bool jumpHeld;
     private bool isCrouching;
+    private bool isClimbing;
 
-    // crouch collider cache
-    private Vector2 boxDefaultSize,
-        boxDefaultOffset;
-    private Vector2 capsuleDefaultSize,
-        capsuleDefaultOffset;
-    private bool hasBox,
-        hasCapsule;
-
-    // state
+    private Vector2 boxDefaultSize, boxDefaultOffset;
+    private Vector2 capsuleDefaultSize, capsuleDefaultOffset;
+    private bool hasBox, hasCapsule;
     private bool wasGrounded;
 
-    // static cache so we don't duplicate background on reloads
+    // Animation
+    private int currentFrame = 0;
+    private float animTimer = 0f;
+
     private static AudioSource bgSource;
 
     private void Awake()
@@ -111,14 +119,17 @@ public class PlayerController2D : MonoBehaviour
         if (ceilingLayer.value == 0)
             ceilingLayer = groundLayer;
 
-        // Player SFX source setup
         audioSrc.playOnAwake = false;
-        audioSrc.spatialBlend = 0f; // 2D
+        audioSrc.spatialBlend = 0f;
         audioSrc.loop = false;
         audioSrc.volume = 1f;
 
-        // --- BACKGROUND AUDIO: create or reuse ---
         TryStartBackgroundAudio();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(AnimationLoop());
     }
 
     private void TryStartBackgroundAudio()
@@ -126,7 +137,6 @@ public class PlayerController2D : MonoBehaviour
         if (sfxBackground == null)
             return;
 
-        // If we already have a bg source from a previous scene/reload, reuse it and just sync volume.
         if (bgSource != null)
         {
             bgSource.volume = backgroundVolume;
@@ -135,13 +145,12 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        // Create a dedicated background audio object
         GameObject go = new GameObject("BackgroundAudio");
         var src = go.AddComponent<AudioSource>();
         src.clip = sfxBackground;
         src.loop = true;
         src.volume = backgroundVolume;
-        src.spatialBlend = 0f; // 2D ambient
+        src.spatialBlend = 0f;
         src.playOnAwake = false;
 
         if (persistBackgroundAcrossScenes)
@@ -159,9 +168,7 @@ public class PlayerController2D : MonoBehaviour
             if (idx != -1)
                 groundLayer = 1 << idx;
             else
-                Debug.LogWarning(
-                    "Create a 'Ground' layer and assign your platforms, then assign it to groundLayer."
-                );
+                Debug.LogWarning("Create a 'Ground' layer and assign it to groundLayer.");
         }
     }
 
@@ -205,17 +212,14 @@ public class PlayerController2D : MonoBehaviour
 
     private void Update()
     {
-        // safety
         if (!groundCheck || !wallCheckLeft || !wallCheckRight || !ceilingCheck)
             EnsureChecksExist();
 
-        // Input
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
         jumpHeld = Input.GetKey(jumpKey) || Input.GetKey(KeyCode.Space);
         bool jumpPressed = Input.GetKeyDown(jumpKey) || Input.GetKeyDown(KeyCode.Space);
 
-        // Checks
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
         touchingLeftWall = Physics2D.OverlapBox(
             (Vector2)wallCheckLeft.position,
@@ -240,7 +244,6 @@ public class PlayerController2D : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        // Flip
         if (flipSpriteOnMove && sr)
         {
             if (horizontal > 0.01f)
@@ -249,7 +252,6 @@ public class PlayerController2D : MonoBehaviour
                 sr.flipX = true;
         }
 
-        // Crouch
         if (enableCrouch)
         {
             if (Input.GetKey(KeyCode.S) && isGrounded)
@@ -266,14 +268,12 @@ public class PlayerController2D : MonoBehaviour
             }
         }
 
-        // Fail restart
         if (transform.position.y < fallThreshold)
             StartCoroutine(ReloadAfterFail());
 
         wasGrounded = isGrounded;
         HandleFootsteps();
 
-        // Keep background volume synced with inspector changes (optional)
         if (bgSource)
             bgSource.volume = backgroundVolume;
     }
@@ -288,24 +288,21 @@ public class PlayerController2D : MonoBehaviour
 
         if (onWall)
         {
+            isClimbing = true;
             rb.gravityScale = 0f;
-
-            // Move player towards the wall while climbing
             float wallDirection = touchingLeftWall ? -1f : 0.5f;
-            float horizontalSpeed = wallDirection * moveSpeed * 0.3f; // 30% of normal speed
-
+            float horizontalSpeed = wallDirection * moveSpeed * 0.3f;
             rb.linearVelocity = new Vector2(horizontalSpeed, vertical * climbSpeed);
         }
         else
         {
+            isClimbing = false;
             rb.gravityScale = 1f;
-
             float speed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
             Vector2 v = rb.linearVelocity;
             v.x = horizontal * speed;
             rb.linearVelocity = v;
 
-            // variable jump height
             if (rb.linearVelocity.y < -0.01f)
                 rb.gravityScale = fallGravityMultiplier;
             else if (rb.linearVelocity.y > 0.01f && !jumpHeld)
@@ -313,82 +310,75 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    private IEnumerator AnimationLoop()
+    {
+        while (true)
+        {
+            // Determine animation state
+            Sprite[] currentAnim;
+            float currentSpeed;
+
+            if (isClimbing && climbSprites != null && climbSprites.Length > 0)
+            {
+                // Climbing
+                currentAnim = climbSprites;
+                currentSpeed = climbAnimSpeed;
+            }
+            else if (isGrounded && Mathf.Abs(horizontal) > 0.1f && walkSprites != null && walkSprites.Length > 0)
+            {
+                // Walking
+                currentAnim = walkSprites;
+                currentSpeed = walkAnimSpeed;
+            }
+            else if (idleSprites != null && idleSprites.Length > 0)
+            {
+                // Idle
+                currentAnim = idleSprites;
+                currentSpeed = idleAnimSpeed;
+            }
+            else
+            {
+                yield return null;
+                continue;
+            }
+
+            animTimer += Time.deltaTime;
+
+            if (animTimer >= currentSpeed)
+            {
+                animTimer = 0f;
+                currentFrame = (currentFrame + 1) % currentAnim.Length;
+                sr.sprite = currentAnim[currentFrame];
+            }
+
+            yield return null;
+        }
+    }
+
     private void HandleFootsteps()
     {
-        // must have audio and clip
         if (!audioSrc || sfxFootstep == null)
             return;
 
-        // must be on ground and moving horizontally
         bool isMoving = Mathf.Abs(horizontal) > 0.1f;
         if (isGrounded && isMoving)
         {
             footstepTimer -= Time.deltaTime;
             if (footstepTimer <= 0f)
             {
-                // small pitch random for variety
                 float oldPitch = audioSrc.pitch;
                 audioSrc.pitch = Random.Range(0.97f, 1.03f);
                 audioSrc.PlayOneShot(sfxFootstep, footstepVolume);
                 audioSrc.pitch = oldPitch;
-
                 footstepTimer = footstepInterval;
             }
         }
         else
         {
-            // reset so it plays quickly after you start moving again
             footstepTimer = 0f;
         }
     }
 
-    // ----- STOMP DETECTION -----
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!IsEnemy(collision.collider))
-            return;
-
-        // We stomped if any contact normal points up into us (we're on top of them)
-        bool hitFromAbove = false;
-        for (int i = 0; i < collision.contactCount; i++)
-        {
-            var n = collision.GetContact(i).normal;
-            if (n.y > 0.5f)
-            {
-                hitFromAbove = true;
-                break;
-            }
-        }
-
-        if (!hitFromAbove)
-            return;
-        if (requireDownwardVelocity && rb.linearVelocity.y > 0f)
-            return;
-
-        // Stomp confirmed: play attack sfx + bounce
-        // PlayOneShot(sfxAttack, 1f);
-
-        var v = rb.linearVelocity;
-        v.y = 0f;
-        rb.linearVelocity = v;
-        rb.AddForce(Vector2.up * stompBounceForce, ForceMode2D.Impulse);
-
-        // TODO: damage/kill enemy here if needed
-        // var enemy = collision.collider.GetComponent<EnemyHealth>();
-        // if (enemy) enemy.TakeDamage(1);
-    }
-
-    private bool IsEnemy(Collider2D col)
-    {
-        // by layer
-        if (enemyLayer.value != 0 && ((1 << col.gameObject.layer) & enemyLayer) != 0)
-            return true;
-
-        // by tag (fallback)
-        return col.CompareTag("Enemy");
-    }
-
-    // ----- Crouch helpers -----
     private void StartCrouch()
     {
         if (isCrouching)
@@ -433,32 +423,15 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    // ----- Audio helper -----
-    private void PlayOneShot(AudioClip clip, float volume = 1f)
-    {
-        if (!audioSrc || clip == null)
-            return;
-        // small natural pitch variance for variety
-        float pitch = Random.Range(0.96f, 1.04f);
-        float oldPitch = audioSrc.pitch;
-        audioSrc.pitch = pitch;
-        audioSrc.PlayOneShot(clip, volume);
-        audioSrc.pitch = oldPitch;
-    }
-
-    // ----- Fail / reload -----
     private IEnumerator ReloadAfterFail()
     {
         if (!enabled)
             yield break;
         enabled = false;
-
-        // optional: could fade background here if you want
         yield return new WaitForSeconds(0.25f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // ----- Gizmos -----
     private void OnDrawGizmos()
     {
         if (groundCheck)

@@ -23,12 +23,12 @@ public class PlayerStomp : MonoBehaviour
     private float postStompInvuln = 0.25f;
 
     [SerializeField]
-    private float stompCooldown = 0.1f; // Prevent multiple stomps on same enemy too quickly
+    private float stompCooldown = 0.1f;
 
     [Header("Audio")]
     [SerializeField]
     private bool playStompSfx = true;
-    
+
     private AudioSource audioSource;
 
     [SerializeField]
@@ -44,7 +44,6 @@ public class PlayerStomp : MonoBehaviour
     [SerializeField]
     private float cutOffAfterSeconds = 0f;
 
-    // Track what we're currently standing on
     private bool isStandingOnEnemy = false;
     private float lastStompTime = -999f;
     private IStompable currentEnemyUnderfoot = null;
@@ -64,7 +63,6 @@ public class PlayerStomp : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        // Check if we're standing on an enemy
         if (playerRb && playerRb.linearVelocity.y > -0.1f && playerRb.linearVelocity.y < 0.1f)
         {
             IStompable stompable = other.GetComponentInParent<IStompable>();
@@ -79,13 +77,12 @@ public class PlayerStomp : MonoBehaviour
                 }
             }
         }
-        
+
         TryHandleStomp(other, false);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        // Clear standing status when leaving enemy
         IStompable stompable = other.GetComponentInParent<IStompable>();
         if (stompable != null && stompable == currentEnemyUnderfoot)
         {
@@ -99,28 +96,22 @@ public class PlayerStomp : MonoBehaviour
         if (!playerRb)
             return;
 
-        // Cooldown to prevent double-stomps
         if (Time.time - lastStompTime < stompCooldown)
             return;
 
-        // Must be moving downward (or just entered)
         if (!isEnter && playerRb.linearVelocity.y > minDownSpeed)
             return;
 
-        // Must hit something stompable
         IStompable stompable = other.GetComponentInParent<IStompable>();
         if (stompable == null)
             return;
 
-        // Ensure our stomp collider is above enemy root (top hit)
         Transform enemyRoot = (stompable as MonoBehaviour).transform;
         if (transform.position.y < enemyRoot.position.y)
             return;
 
-        // Don't stomp if we're just standing (allow jumping while on enemy)
         if (!isEnter && isStandingOnEnemy && stompable == currentEnemyUnderfoot)
         {
-            // Player is standing on enemy, don't auto-stomp, let them jump
             return;
         }
 
@@ -140,7 +131,7 @@ public class PlayerStomp : MonoBehaviour
         }
 
         // 3) Play sound
-        if (sfxAttack != null)
+        if (playStompSfx && sfxAttack != null)
         {
             if (!audioSource)
             {
@@ -159,8 +150,7 @@ public class PlayerStomp : MonoBehaviour
 
         // 4) Notify enemy
         stompable.TakeStomp(playerRb.gameObject);
-        
-        // Clear standing status since we just stomped
+
         isStandingOnEnemy = false;
         currentEnemyUnderfoot = null;
     }
@@ -183,7 +173,6 @@ public class PlayerStomp : MonoBehaviour
             src.Stop();
     }
 
-    // Public method to check if player can jump (called from PlayerController)
     public bool IsStandingOnEnemy()
     {
         return isStandingOnEnemy;
