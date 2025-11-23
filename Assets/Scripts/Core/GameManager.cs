@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -127,9 +128,20 @@ namespace Roach.Assets.Scripts.Core
                 return;
 
             gameEnded = true;
+
+            Debug.Log("Game Over!");
+
+            // Wait a bit before showing game over screen
+            StartCoroutine(ShowGameOverWithDelay());
+        }
+
+        private IEnumerator ShowGameOverWithDelay()
+        {
+            // Wait 1 second so player sees what killed them
+            yield return new WaitForSecondsRealtime(1f); // Use Realtime because game is paused
+
             Time.timeScale = 0f;
             OnGameOver?.Invoke();
-            Debug.Log("Game Over!");
         }
 
         public void LevelComplete()
