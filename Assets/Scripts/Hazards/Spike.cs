@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Roach.Assets.Scripts.Hazards
 {
@@ -10,7 +11,14 @@ namespace Roach.Assets.Scripts.Hazards
         [Tooltip("Amount of damage this spike deals")]
         private int damage = 1;
 
+        [SerializeField]
+        [Tooltip("Cooldown between damage (seconds)")]
+        private float damageCooldown = 1.5f;
+
         public int Damage => damage;
+
+        // Track when each object was last damaged
+        private Dictionary<GameObject, float> lastDamageTime = new Dictionary<GameObject, float>();
 
         private void Awake()
         {
@@ -24,6 +32,20 @@ namespace Roach.Assets.Scripts.Hazards
                     this
                 );
             }
+        }
+
+        public bool CanDamage(GameObject target)
+        {
+            if (!lastDamageTime.ContainsKey(target))
+                return true;
+
+            float timeSinceLastDamage = Time.time - lastDamageTime[target];
+            return timeSinceLastDamage >= damageCooldown;
+        }
+
+        public void RecordDamage(GameObject target)
+        {
+            lastDamageTime[target] = Time.time;
         }
 
         private void OnDrawGizmos()

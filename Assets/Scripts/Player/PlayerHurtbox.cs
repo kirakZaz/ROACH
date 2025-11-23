@@ -1,5 +1,6 @@
 using System.Collections;
 using Roach.Assets.Scripts.Hazards;
+using Roach.Assets.Scripts.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,11 @@ namespace Roach.Assets.Scripts.Player
 
         [SerializeField]
         private float hurtInvulnerability = 1.0f;
+
+        [Header("Spike Settings")]
+        [SerializeField]
+        [Tooltip("Reduced knockback for spikes (player needs to escape)")]
+        private float spikeKnockbackMultiplier = 1.5f;
 
         [Header("Feedback (optional)")]
         [SerializeField]
@@ -60,27 +66,39 @@ namespace Roach.Assets.Scripts.Player
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (isInvulnerable)
-                return;
             if (!rb || !playerLives)
                 return;
 
             int damage = 0;
+            bool isSpike = false;
+            Spike spikeComponent = null;
 
             // Check for spike component first
-            var spike = other.GetComponent<Spike>();
-            if (spike != null)
+            spikeComponent = other.GetComponent<Spike>();
+            if (spikeComponent != null)
             {
-                damage = spike.Damage;
+                // Check if spike can damage (cooldown check)
+                if (!spikeComponent.CanDamage(gameObject))
+                {
+                    Debug.Log("Spike on cooldown, no damage");
+                    return; // Still on cooldown
+                }
+
+                isSpike = true;
+                damage = spikeComponent.Damage;
             }
             // Then check for enemy tag
             else if (other.CompareTag(enemyTag))
             {
+                if (isInvulnerable)
+                    return;
                 damage = 1; // default enemy damage
             }
             // Check for hazard tag (fallback for other hazards)
             else if (other.CompareTag("Hazard"))
             {
+                if (isInvulnerable)
+                    return;
                 damage = 1; // default hazard damage
             }
 
@@ -88,28 +106,41 @@ namespace Roach.Assets.Scripts.Player
             if (damage == 0)
                 return;
 
+            // Record spike damage time
+            if (spikeComponent != null)
+            {
+                spikeComponent.RecordDamage(gameObject);
+            }
+
             // Apply damage
             playerLives.LoseLife(damage);
 
-            // if no lives left -> reload
-            if (playerLives.CurrentLives <= 0)
+            // Only do knockback if player is still alive
+            if (playerLives.CurrentLives > 0)
             {
-                ReloadScene();
-                return;
+                float knockbackMult = isSpike ? spikeKnockbackMultiplier : 1f;
+                DoKnockbackFrom(other.transform, knockbackMult);
+                
+                // Start invulnerability for enemies (not spikes - they have their own cooldown)
+                if (!isSpike)
+                {
+                    StartCoroutine(InvulnerabilityFrames());
+                }
+                else
+                {
+                    // Just flash for spikes
+                    StartCoroutine(QuickFlash());
+                }
             }
-
-            // knockback and brief i-frames
-            DoKnockbackFrom(other.transform);
-            StartCoroutine(InvulnerabilityFrames());
         }
 
-        private void DoKnockbackFrom(Transform enemy)
+        private void DoKnockbackFrom(Transform enemy, float multiplier = 1f)
         {
             // if enemy is to the right, knock left; else right
             float dir = (transform.position.x < enemy.position.x) ? -1f : 1f;
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(
-                new Vector2(dir * knockbackHorizontal, knockbackVertical),
+                new Vector2(dir * knockbackHorizontal * multiplier, knockbackVertical * multiplier),
                 ForceMode2D.Impulse
             );
         }
@@ -145,10 +176,14 @@ namespace Roach.Assets.Scripts.Player
             isInvulnerable = false;
         }
 
-        private void ReloadScene()
+        private IEnumerator QuickFlash()
         {
-            var sc = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(sc.buildIndex);
+            if (spriteRenderer)
+            {
+                spriteRenderer.color = damageColor;
+                yield return new WaitForSeconds(flashDuration * 2);
+                spriteRenderer.color = originalColor;
+            }
         }
 
         private void OnValidate()

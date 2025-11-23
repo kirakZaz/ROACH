@@ -3,54 +3,68 @@ using UnityEngine.UI;
 
 public class LivesUI : MonoBehaviour
 {
-    [Header("UI Elements")]
     [SerializeField]
-    private Image[] lifeImages;
-
-    [Header("Sprites")]
-    [SerializeField]
-    private Sprite fullHeart;
-
-    [SerializeField]
-    private Sprite emptyHeart;
-
     private PlayerLives playerLives;
 
-    private void Start()
-    {
-        // Find PlayerLives component
-        playerLives = FindObjectOfType<PlayerLives>();
+    [SerializeField]
+    private Image[] heartImages; // 3 сердечка
 
-        if (playerLives != null)
+    [SerializeField]
+    private int heartPixelSize = 8;
+
+    [SerializeField]
+    private int heartPPU = 64;
+
+    private void Awake()
+    {
+        // Создаём спрайт сердечка
+        var heartSprite = HeartSpriteGenerator.CreatePixelHeartSprite(heartPixelSize, heartPPU);
+        
+        // Применяем ко всем изображениям
+        for (int i = 0; i < heartImages.Length; i++)
         {
-            playerLives.OnLivesChanged += UpdateLivesDisplay;
-            UpdateLivesDisplay(playerLives.CurrentLives);
-        }
-        else
-        {
-            Debug.LogError("PlayerLives not found in scene!");
+            if (!heartImages[i])
+                continue;
+            
+            heartImages[i].sprite = heartSprite;
+            heartImages[i].preserveAspect = true;
+            heartImages[i].color = Color.red; // полные сердечки
         }
     }
 
-    private void UpdateLivesDisplay(int currentLives)
+    private void OnEnable()
     {
-        if (lifeImages == null)
-            return;
-
-        for (int i = 0; i < lifeImages.Length; i++)
+        if (!playerLives)
         {
-            if (lifeImages[i] != null)
+            playerLives = FindObjectOfType<PlayerLives>();
+            if (!playerLives)
             {
-                lifeImages[i].sprite = (i < currentLives) ? fullHeart : emptyHeart;
+                Debug.LogError("LivesUI: PlayerLives not found in scene!", this);
+                return;
             }
         }
+
+        playerLives.OnLivesChanged += UpdateHearts;
+        UpdateHearts(playerLives.CurrentLives);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        if (playerLives != null)
+        if (playerLives)
+            playerLives.OnLivesChanged -= UpdateHearts;
+    }
+
+    private void UpdateHearts(int current)
+    {
+        Debug.Log($"LivesUI: Updating hearts to {current}");
+        
+        for (int i = 0; i < heartImages.Length; i++)
         {
-            playerLives.OnLivesChanged -= UpdateLivesDisplay;
+            if (!heartImages[i])
+                continue;
+            
+            bool on = i < current;
+            heartImages[i].color = on ? Color.red : new Color(1f, 1f, 1f, 0.25f);
         }
     }
 }
